@@ -24,15 +24,19 @@ public class Supply {
     @Column(nullable = false)
     private Date deliveryDate;
 
+    @Column(nullable = false)
+    private Date creationDate;
+
     @OneToMany(mappedBy = "supply")
     private Set<PurchaseLine> purchaseLines;
 
     public Supply() {}
 
-    public Supply(Manufacturer manufacturer, String description, Date deliveryDate) {
+    public Supply(Manufacturer manufacturer, String description, Date deliveryDate, Date creationDate) {
         this.manufacturer = manufacturer;
         this.description = description;
         this.deliveryDate = deliveryDate;
+        this.creationDate = creationDate;
         this.purchaseLines = new HashSet<>();
     }
 
@@ -40,7 +44,7 @@ public class Supply {
         return id;
     }
 
-    public Manufacturer getSupplier() {
+    public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
@@ -52,6 +56,10 @@ public class Supply {
         return deliveryDate;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
     public Set<PurchaseLine> getPurchaseLines() {
         return purchaseLines;
     }
@@ -60,7 +68,7 @@ public class Supply {
         this.id = id;
     }
 
-    public void setSupplier(Manufacturer manufacturer) {
+    public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 
@@ -70,6 +78,10 @@ public class Supply {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public void setPurchaseLines(Set<PurchaseLine> purchaseLines) {

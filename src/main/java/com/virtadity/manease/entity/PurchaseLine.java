@@ -21,7 +21,7 @@ public class PurchaseLine {
     @JoinColumn(name="product_id")
     private Product product;
 
-    private Integer price;
+    private Float price;
     private Integer quantity;
 
     public PurchaseLine() {}
@@ -30,14 +30,14 @@ public class PurchaseLine {
             PurchaseLineCompositeKey id,
             Supply supply,
             Product product,
-            Integer cost,
+            Float price,
             Integer quantity
             ) {
 
         this.id = id;
         this.supply = supply;
         this.product = product;
-        this.price = cost;
+        this.price = price;
         this.quantity = quantity;
     }
 
@@ -53,7 +53,7 @@ public class PurchaseLine {
         return supply;
     }
 
-    public Integer getCost() {
+    public Float getPrice() {
         return price;
     }
 
@@ -73,8 +73,8 @@ public class PurchaseLine {
         this.supply = supply;
     }
 
-    public void setCost(Integer cost) {
-        this.price = cost;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public void setQuantity(Integer quantity) {
@@ -86,14 +86,14 @@ public class PurchaseLine {
         if (!(o instanceof PurchaseLine that)) return false;
         var areSupplyEqual = Objects.equals(getSupply(), that.getSupply());
         var areProductEqual = Objects.equals(getProduct(), that.getProduct());
-        var areCostEqual = Objects.equals(getCost(), that.getCost());
+        var arePriceEqual = Objects.equals(getPrice(), that.getPrice());
         var areQuantityEqual = Objects.equals(getQuantity(), that.getQuantity());
 
-        return areSupplyEqual && areProductEqual && areCostEqual && areQuantityEqual;
+        return areSupplyEqual && areProductEqual && arePriceEqual && areQuantityEqual;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSupply(), getProduct(), getCost(), getQuantity());
+        return Objects.hash(getSupply(), getProduct(), getPrice(), getQuantity());
     }
 }

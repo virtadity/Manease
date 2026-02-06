@@ -15,6 +15,8 @@ public class PurchaseLineCompositeKey implements Serializable {
     @Column(name = "product_id")
     private Long productId;
 
+    public PurchaseLineCompositeKey() {}
+
     public PurchaseLineCompositeKey(Long supplyId, Long productId) {
         this.supplyId = supplyId;
         this.productId = productId;

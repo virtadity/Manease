@@ -31,11 +31,12 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, Float weight) {
+    public Product(String name, Float weight, ProductType productType) {
         this.name = name;
         this.manufacturers = new HashSet<>();
         this.purchaseLines = new HashSet<>();
         this.weight = weight;
+        this.productType = productType;
     }
 
     public Long getId() {

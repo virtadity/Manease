@@ -1,7 +1,7 @@
 package com.virtadity.manease.repository;
 
-import com.virtadity.manease.entity.Manufacturer;
-import com.virtadity.manease.entity.Supply;
+import com.virtadity.manease.entity.*;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,13 +17,14 @@ import org.testcontainers.utility.DockerImageName;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Testcontainers
 @SpringBootTest
-public class SupplyRepositoryReportTest {
+public class ReportRepositoryTests {
 
     @Container
     static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer(
@@ -54,6 +55,15 @@ public class SupplyRepositoryReportTest {
 
     @Autowired
     ManufacturerRepository manufacturerRepository;
+
+    @Autowired
+    ProductTypeRepository productTypeRepository;
+
+    @Autowired
+    ProductRepository productRepository;
+
+    @Autowired
+    PurchaseLineRepository purchaseLineRepository;
 
     @Test
     void testSearchSupplyByDates() {
@@ -90,5 +100,41 @@ public class SupplyRepositoryReportTest {
         var suppliesBetweenDates = supplyRepository.findSupplyBetweenDates(fromDate, toDate);
 
         assertEquals(suppliesBetweenDates, savedSupplies.subList(0, 2));
+    }
+
+    @Transactional
+    @Test
+    void testPriceCount() {
+        var manufacturer = new Manufacturer("Спутник");
+        manufacturer = manufacturerRepository.save(manufacturer);
+
+        var productType = new ProductType("овощь");
+        productType = productTypeRepository.save(productType);
+
+        var potato = new Product("Картофель", 100.0f, productType);
+        potato.setManufacturers(Set.of(manufacturer));
+        potato = productRepository.save(potato);
+
+        var tomato = new Product("Помидор", 200.0f, productType);
+        tomato.setManufacturers(Set.of(manufacturer));
+        tomato = productRepository.save(tomato);
+
+        var deliveryDate = Date.valueOf(LocalDate.of(2025, 4, 16));
+        var creationDate = Date.valueOf(LocalDate.of(2025, 4, 13));
+
+        var supply = new Supply(manufacturer, "Поставка овощей", deliveryDate, creationDate);
+        supply = supplyRepository.save(supply);
+
+        var potatoPurchaseLineId = new PurchaseLineCompositeKey(supply.getId(), potato.getId());
+        var potatoPurchaseLine = new PurchaseLine(potatoPurchaseLineId, supply, potato, 19.99f, 10);
+        potatoPurchaseLine = purchaseLineRepository.save(potatoPurchaseLine);
+
+        var tomatoPurchaseLineId = new PurchaseLineCompositeKey(supply.getId(), tomato.getId());
+        var tomatoPurchaseLine = new PurchaseLine(tomatoPurchaseLineId, supply, tomato, 24.99f, 15);
+        tomatoPurchaseLine = purchaseLineRepository.save(tomatoPurchaseLine);
+
+        var actualCost = purchaseLineRepository.countTotalPriceOfSupply(supply.getId());
+        var expectedCost = 19.99f * 10 + 24.99f * 15;
+        assertEquals(expectedCost, actualCost);
     }
 }

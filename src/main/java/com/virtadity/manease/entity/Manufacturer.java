@@ -10,7 +10,7 @@ import java.util.Set;
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "manufacturer_id", nullable = false)
     private Long id;
 
     @Column(nullable = false, unique = true)

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Supply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "supply_id", nullable = false)
     private Long id;
 
     @ManyToOne

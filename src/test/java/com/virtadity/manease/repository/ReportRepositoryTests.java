@@ -104,7 +104,7 @@ public class ReportRepositoryTests {
 
     @Transactional
     @Test
-    void testPriceCount() {
+    void testCountTotalPrice() {
         var manufacturer = new Manufacturer("Спутник");
         manufacturer = manufacturerRepository.save(manufacturer);
 
@@ -136,5 +136,41 @@ public class ReportRepositoryTests {
         var actualCost = purchaseLineRepository.countTotalPriceOfSupply(supply.getId());
         var expectedCost = 19.99f * 10 + 24.99f * 15;
         assertEquals(expectedCost, actualCost);
+    }
+
+    @Transactional
+    @Test
+    void testCountTotalWeight() {
+        var manufacturer = new Manufacturer("Спутник");
+        manufacturer = manufacturerRepository.save(manufacturer);
+
+        var productType = new ProductType("овощь");
+        productType = productTypeRepository.save(productType);
+
+        var potato = new Product("Картофель", 100.0f, productType);
+        potato.setManufacturers(Set.of(manufacturer));
+        potato = productRepository.save(potato);
+
+        var tomato = new Product("Помидор", 200.0f, productType);
+        tomato.setManufacturers(Set.of(manufacturer));
+        tomato = productRepository.save(tomato);
+
+        var deliveryDate = Date.valueOf(LocalDate.of(2025, 4, 16));
+        var creationDate = Date.valueOf(LocalDate.of(2025, 4, 13));
+
+        var supply = new Supply(manufacturer, "Поставка овощей", deliveryDate, creationDate);
+        supply = supplyRepository.save(supply);
+
+        var potatoPurchaseLineId = new PurchaseLineCompositeKey(supply.getId(), potato.getId());
+        var potatoPurchaseLine = new PurchaseLine(potatoPurchaseLineId, supply, potato, 19.99f, 10);
+        potatoPurchaseLine = purchaseLineRepository.save(potatoPurchaseLine);
+
+        var tomatoPurchaseLineId = new PurchaseLineCompositeKey(supply.getId(), tomato.getId());
+        var tomatoPurchaseLine = new PurchaseLine(tomatoPurchaseLineId, supply, tomato, 24.99f, 15);
+        tomatoPurchaseLine = purchaseLineRepository.save(tomatoPurchaseLine);
+
+        var expectedWeight = 100.0f * 10 + 200.0f * 15;
+        var actualWeight = purchaseLineRepository.countTotalWeightOfSupply(supply.getId());
+        assertEquals(expectedWeight, actualWeight);
     }
 }

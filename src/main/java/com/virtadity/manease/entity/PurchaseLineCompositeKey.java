@@ -9,11 +9,32 @@ import java.util.Objects;
 @Embeddable
 public class PurchaseLineCompositeKey implements Serializable {
 
+    @Column(name = "supply_id")
+    private Long supplyId;
+
     @Column(name = "product_id")
     private Long productId;
 
-    @Column(name = "supply_id")
-    private Long supplyId;
+    public PurchaseLineCompositeKey(Long supplyId, Long productId) {
+        this.supplyId = supplyId;
+        this.productId = productId;
+    }
+
+    public Long getSupplyId() {
+        return supplyId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setSupplyId(Long supplyId) {
+        this.supplyId = supplyId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
     @Override
     public boolean equals(Object o) {

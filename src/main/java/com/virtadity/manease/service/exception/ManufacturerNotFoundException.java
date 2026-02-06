@@ -6,7 +6,7 @@ public class ManufacturerNotFoundException extends RuntimeException {
     }
 
     public static ManufacturerNotFoundException withId(Long id) {
-        var message = "Not found Manufacturer with such id = " + id;
+        var message = "Manufacturer not found with such id = " + id;
         return new ManufacturerNotFoundException(message);
     }
 }

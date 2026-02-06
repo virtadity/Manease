@@ -6,7 +6,7 @@ public class ProductTypeNotFoundException extends RuntimeException {
     }
 
     public static ProductTypeNotFoundException withId(Long id) {
-        var message = "Not found ProductType with such id = " + id;
+        var message = "ProductType not found with such id = " + id;
         return new ProductTypeNotFoundException(message);
     }
 }

@@ -54,7 +54,7 @@ public class Product {
         return productType;
     }
 
-    public Set<Manufacturer> getSuppliers() {
+    public Set<Manufacturer> getManufacturers() {
         return manufacturers;
     }
 
@@ -78,7 +78,7 @@ public class Product {
         this.productType = productType;
     }
 
-    public void setSuppliers(Set<Manufacturer> manufacturers) {
+    public void setManufacturers(Set<Manufacturer> manufacturers) {
         this.manufacturers = manufacturers;
     }
 

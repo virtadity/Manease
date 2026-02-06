@@ -9,6 +9,6 @@ public interface SupplyService {
     List<SupplyDTO> all();
     Optional<SupplyDTO> one(Long id);
     SupplyDTO store(SupplyDTO supplyDTO, Optional<Long> id);
-    List<SupplyDTO> getSuppliesBetweenDates();
+    List<SupplyDTO> getSuppliesBetweenDates(String fromDate, String toDate);
     void delete(Long id);
 }

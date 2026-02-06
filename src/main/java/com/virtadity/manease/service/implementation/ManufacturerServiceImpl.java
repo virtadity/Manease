@@ -4,6 +4,7 @@ import com.virtadity.manease.dto.ManufacturerDTO;
 import com.virtadity.manease.entity.Manufacturer;
 import com.virtadity.manease.repository.ManufacturerRepository;
 import com.virtadity.manease.service.ManufacturerService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         return manufacturerRepository.findById(id).map(this::transformToDTO);
     }
 
+    @Transactional
     @Override
     public ManufacturerDTO store(ManufacturerDTO manufacturerDTO, Optional<Long> id) {
         var manufacturer = transformToManufacturer(manufacturerDTO, id);

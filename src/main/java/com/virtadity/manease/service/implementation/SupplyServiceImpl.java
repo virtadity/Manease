@@ -6,6 +6,7 @@ import com.virtadity.manease.repository.ManufacturerRepository;
 import com.virtadity.manease.repository.SupplyRepository;
 import com.virtadity.manease.service.SupplyService;
 import com.virtadity.manease.service.exception.ManufacturerNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -33,6 +34,7 @@ public class SupplyServiceImpl implements SupplyService {
         return supplyRepository.findById(id).map(this::transformToDTO);
     }
 
+    @Transactional
     @Override
     public SupplyDTO store(SupplyDTO supplyDTO, Optional<Long> id) {
         var supply = transformToSupply(supplyDTO, id);
@@ -41,8 +43,14 @@ public class SupplyServiceImpl implements SupplyService {
     }
 
     @Override
-    public List<SupplyDTO> getSuppliesBetweenDates() {
-        return List.of();
+    public List<SupplyDTO> getSuppliesBetweenDates(String fromDate, String toDate) {
+        var startDate = Date.valueOf(fromDate);
+        var endDate = Date.valueOf(toDate);
+        return supplyRepository
+                .findSupplyBetweenDates(startDate, endDate)
+                .stream()
+                .map(this::transformToDTO)
+                .toList();
     }
 
     @Override
@@ -55,8 +63,8 @@ public class SupplyServiceImpl implements SupplyService {
                 supply.getId(),
                 supply.getManufacturer().getId(),
                 supply.getDescription(),
-                supply.getDeliveryDate().toLocalDate(),
-                supply.getCreationDate().toLocalDate()
+                supply.getDeliveryDate().toString(),
+                supply.getCreationDate().toString()
         );
     }
 

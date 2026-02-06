@@ -4,6 +4,7 @@ import com.virtadity.manease.dto.ProductTypeDTO;
 import com.virtadity.manease.entity.ProductType;
 import com.virtadity.manease.repository.ProductTypeRepository;
 import com.virtadity.manease.service.ProductTypeService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         return productTypeRepository.findById(id).map(this::transformToDTO);
     }
 
+    @Transactional
     @Override
     public ProductTypeDTO store(ProductTypeDTO productTypeDTO, Optional<Long> id) {
         var productType = transformToProductType(productTypeDTO);

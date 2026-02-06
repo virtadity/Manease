@@ -41,6 +41,11 @@ public class SupplyServiceImpl implements SupplyService {
     }
 
     @Override
+    public List<SupplyDTO> getSuppliesBetweenDates() {
+        return List.of();
+    }
+
+    @Override
     public void delete(Long id) {
         supplyRepository.deleteById(id);
     }

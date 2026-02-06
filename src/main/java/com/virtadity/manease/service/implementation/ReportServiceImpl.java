@@ -26,7 +26,7 @@ public class ReportServiceImpl implements ReportService {
         var notes = supplyService.getSuppliesBetweenDates(fromDate, toDate).stream().map(supply -> {
             var cost = purchaseLineRepository.countTotalPriceOfSupply(supply.id());
             var weight = purchaseLineRepository.countTotalWeightOfSupply(supply.id());
-            return new ReportNoteDTO(supply, cost, weight);
+            return new ReportNoteDTO(supply, weight, cost);
         }).toList();
 
         var totalCost = notes
@@ -41,7 +41,7 @@ public class ReportServiceImpl implements ReportService {
                 .stream()
                 .reduce(
                         0.0f,
-                        (partialResult, note ) -> note.price() + partialResult,
+                        (partialResult, note ) -> note.weight() + partialResult,
                         Float::sum
                 );
 

@@ -13,12 +13,12 @@ public class PrepareReportAction {
     public Report execute(List<ReportLine> reportLineList, LocalDateTime fromDate, LocalDateTime toDate) {
         var totalCost = reportLineList
                 .parallelStream()
-                .map(ReportLine::totalSupplyCost)
+                .map(ReportLine::totalPurchaseCost)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         var totalWeight = reportLineList
                 .parallelStream()
-                .map(ReportLine::totalSupplyWeight)
+                .map(ReportLine::totalPurchaseWeight)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return new Report(fromDate, toDate, totalCost, totalWeight, reportLineList);

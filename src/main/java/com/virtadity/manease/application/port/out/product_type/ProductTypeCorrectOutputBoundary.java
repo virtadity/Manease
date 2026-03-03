@@ -5,6 +5,6 @@ import com.virtadity.manease.domain.model.ProductType;
 import java.util.UUID;
 
 public interface ProductTypeCorrectOutputBoundary {
-    ProductType execute(UUID productTypeId, ProductType productType);
+    ProductType correct(UUID productTypeId, ProductType productType);
 
 }

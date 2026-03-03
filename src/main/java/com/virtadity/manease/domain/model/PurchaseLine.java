@@ -11,6 +11,5 @@ public record PurchaseLine (
     UUID purchaseId,
     UUID productId,
     BigDecimal price,
-    BigInteger quantity,
-    List<ReportLine> reportLineList
+    BigInteger quantity
 ) {}

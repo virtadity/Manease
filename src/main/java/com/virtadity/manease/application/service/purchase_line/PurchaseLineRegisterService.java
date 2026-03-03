@@ -17,7 +17,7 @@ public class PurchaseLineRegisterService implements PurchaseLineRegisterInputBou
     @Override
     public PurchaseLineResponse execute(PurchaseLineRequest purchaseLineRequest) {
         var purchaseLine = purchaseLineMapper.toPurchaseLine(purchaseLineRequest);
-        var savedPurchaseLine = purchaseLineStorageRegister.execute(purchaseLine);
+        var savedPurchaseLine = purchaseLineStorageRegister.create(purchaseLine);
         return purchaseLineMapper.toPurchaseLineResponse(savedPurchaseLine);
     }
 }

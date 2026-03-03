@@ -17,7 +17,7 @@ public class PurchaseLineGetAllService implements PurchaseLineGetAllInputBoundar
 
     @Override
     public List<PurchaseLineResponse> execute() {
-        var purchaseLineList = purchaseLineStorageGetAll.execute();
+        var purchaseLineList = purchaseLineStorageGetAll.getAll();
         return purchaseLineMapper.toPurchaseLineResponseList(purchaseLineList);
     }
 }

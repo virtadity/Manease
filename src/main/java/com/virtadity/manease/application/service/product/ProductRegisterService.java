@@ -17,7 +17,7 @@ public class ProductRegisterService  implements ProductRegisterInputBoundary {
     @Override
     public ProductResponse execute(ProductRequest productRequest) {
         var product = productMapper.toProduct(productRequest);
-        var savedProduct = productStorageRegister.execute(product);
+        var savedProduct = productStorageRegister.create(product);
         return productMapper.toProductResponse(savedProduct);
     }
 }

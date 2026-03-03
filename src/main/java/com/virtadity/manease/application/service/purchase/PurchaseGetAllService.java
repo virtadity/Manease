@@ -17,7 +17,7 @@ public class PurchaseGetAllService implements PurchaseGetAllInputBoundary {
 
     @Override
     public List<PurchaseResponse> execute() {
-        var purchaseList = purchaseStorageGetAll.execute();
+        var purchaseList = purchaseStorageGetAll.getAll();
         return purchaseMapper.toPurchaseResponseList(purchaseList);
     }
 }

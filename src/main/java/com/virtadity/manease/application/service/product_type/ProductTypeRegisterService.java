@@ -18,7 +18,7 @@ public class ProductTypeRegisterService implements ProductTypeRegisterInputBound
     @Override
     public ProductTypeResponse execute(ProductTypeRequest productTypeRequest) {
         var productType = productTypeMapper.toProductType(productTypeRequest);
-        var savedProductType = productTypeStorageRegister.execute(productType);
+        var savedProductType = productTypeStorageRegister.create(productType);
         return productTypeMapper.toProductTypeResponse(savedProductType);
     }
 }

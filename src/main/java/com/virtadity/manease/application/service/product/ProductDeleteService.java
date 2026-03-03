@@ -15,6 +15,6 @@ public class ProductDeleteService implements ProductDeleteInputBoundary {
 
     @Override
     public void execute(UUID productId) {
-        productStorageDelete.execute(productId);
+        productStorageDelete.delete(productId);
     }
 }

@@ -19,7 +19,7 @@ public class ProductCorrectService implements ProductCorrectInputBoundary {
     @Override
     public ProductResponse execute(UUID productId, ProductRequest productRequest) {
         var product = productMapper.toProduct(productRequest);
-        var correctedProduct = productStorageCorrect.execute(productId, product);
+        var correctedProduct = productStorageCorrect.correct(productId, product);
         return productMapper.toProductResponse(correctedProduct);
     }
 }

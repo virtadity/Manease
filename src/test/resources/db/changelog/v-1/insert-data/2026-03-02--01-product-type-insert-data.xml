@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-1" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+            <column name="product_type_name" value="Яблоко"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-2" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="3a5f12a1-f09d-4f49-a4ba-f331dd4cda34"/>
+            <column name="product_type_name" value="Вишня"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-3" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="8490669f-f0cd-4d18-903b-e5b3fa1a29c4"/>
+            <column name="product_type_name" value="Груша"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-4" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="af0d506d-3aeb-4276-95c9-5754e4d115c5"/>
+            <column name="product_type_name" value="Банан"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-5" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="4dda586b-997b-42c3-a56d-7e4b2c8fac43"/>
+            <column name="product_type_name" value="Апельсин"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-6" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="662df133-a7c7-4082-9c57-39ea928738a4"/>
+            <column name="product_type_name" value="Мультифрукт"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-7" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="aa7f08cd-66c8-48c1-aa04-79b234e82789"/>
+            <column name="product_type_name" value="Мандарин"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-8" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="8dbedb3a-3ce2-405e-8b96-4da80dbcce2a"/>
+            <column name="product_type_name" value="Клубника"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-9" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="0434994b-f103-4e6d-80bd-7a96e16ceb88"/>
+            <column name="product_type_name" value="Картофель"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-type-insert-data-10" author="virtadity">
+        <insert tableName="product_type">
+            <column name="product_type_id" value="a141098a-e45b-4c40-95e5-9d877f05b656"/>
+            <column name="product_type_name" value="Баклажаны"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

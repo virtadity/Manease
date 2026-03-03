@@ -18,7 +18,7 @@ public class ProductTypeGetOneService implements ProductTypeGetOneInputBoundary 
 
     @Override
     public Optional<ProductTypeResponse> execute(UUID productTypeId) {
-        var productType = productTypeStorageGetOne.execute(productTypeId);
+        var productType = productTypeStorageGetOne.getOne(productTypeId);
         return productType.map(productTypeMapper::toProductTypeResponse);
     }
 }

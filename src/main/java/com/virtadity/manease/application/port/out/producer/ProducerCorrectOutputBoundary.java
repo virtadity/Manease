@@ -5,5 +5,5 @@ import com.virtadity.manease.domain.model.Producer;
 import java.util.UUID;
 
 public interface ProducerCorrectOutputBoundary {
-    Producer execute(UUID producerId, Producer producer);
+    Producer correct(UUID producerId, Producer producer);
 }

@@ -18,7 +18,7 @@ public class ProducerGetOneService implements ProducerGetOneInputBoundary {
 
     @Override
     public Optional<ProducerResponse> execute(UUID producerId) {
-        var producer = producerStorageGetOne.execute(producerId);
+        var producer = producerStorageGetOne.getOne(producerId);
         return producer.map(producerMapper::toProducerResponse);
     }
 }

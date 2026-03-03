@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-initial-schema-product-1" author="virtadity">
+        <createTable tableName="product">
+            <column type="uuid" name="product_id"/>
+            <column type="varchar(255)" name="product_name"/>
+            <column type="decimal(10, 2)" name="product_weight"/>
+            <column type="uuid" name="producer_id"/>
+            <column type="uuid" name="product_type_id"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-2" author="virtadity">
+        <addPrimaryKey tableName="product" columnNames="product_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-3" author="virtadity">
+        <addNotNullConstraint tableName="product" columnName="product_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-4" author="virtadity">
+        <addNotNullConstraint tableName="product" columnName="product_name"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-5" author="virtadity">
+        <addUniqueConstraint tableName="product" columnNames="product_name"/>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-initial-schema-product-6" author="virtadity">
+        <addNotNullConstraint tableName="product" columnName="product_weight" />
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-7" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="product"
+                baseColumnNames="producer_id"
+                constraintName="fk-product-producer"
+                referencedTableName="producer"
+                referencedColumnNames="producer_id"
+        />
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-8" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="product"
+                baseColumnNames="product_type_id"
+                constraintName="fk-product-product-type"
+                referencedTableName="product_type"
+                referencedColumnNames="product_type_id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

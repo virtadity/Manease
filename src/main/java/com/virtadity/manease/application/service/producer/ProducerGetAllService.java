@@ -17,7 +17,7 @@ public class ProducerGetAllService implements ProducerGetAllInputBoundary {
 
     @Override
     public List<ProducerResponse> execute() {
-        var producerList = producerStorageGetAll.execute();
+        var producerList = producerStorageGetAll.getAll();
         return producerMapper.toProducerResponseList(producerList);
     }
 }

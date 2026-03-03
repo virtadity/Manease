@@ -5,5 +5,5 @@ import com.virtadity.manease.domain.model.PurchaseLine;
 import java.util.List;
 
 public interface PurchaseLineGetAllOutputBoundary {
-    List<PurchaseLine> execute();
+    List<PurchaseLine> getAll();
 }

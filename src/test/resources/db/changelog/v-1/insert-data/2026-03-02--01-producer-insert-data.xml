@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-producer-insert-data-1" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="6d26ba51-2537-470c-8f99-384d20d138e6"/>
+            <column name="producer_name" value="Магнит"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-2" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="443572fb-3f81-40e2-9693-f311813f2ca3"/>
+            <column name="producer_name" value="Пятёрочка"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-3" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="f7b08866-47ea-4f7b-8610-65a24c2848e4"/>
+            <column name="producer_name" value="Красное-Белое"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-4" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="39c18b89-6143-47cd-9c42-6f3ae53a9529"/>
+            <column name="producer_name" value="ВкуссВилл"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-5" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="3546a20d-7c30-46b2-a140-05b55833eb6f"/>
+            <column name="producer_name" value="АзбукаВкуса"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-producer-insert-data-6" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="3aa54248-f7d3-4199-a815-0929298403db"/>
+            <column name="producer_name" value="Спутник"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-7" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="90e5b40b-6ba9-4f9e-8d80-277adcd84ea2"/>
+            <column name="producer_name" value="Бристоль"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-8" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="3c614273-5635-412e-8184-83f38e370146"/>
+            <column name="producer_name" value="Дикси"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-producer-insert-data-9" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="6b7a6078-08ae-48c6-91ae-25c42a412202"/>
+            <column name="producer_name" value="Перекрёсток"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-producer-insert-data-10" author="virtadity">
+        <insert tableName="producer">
+            <column name="producer_id" value="78dd1bda-cd4d-4487-9b24-7ad8233648e1"/>
+            <column name="producer_name" value="Светофор"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

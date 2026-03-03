@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-1" author="virtadity">
+        <createTable tableName="purchase_line">
+            <column type="uuid" name="purchase_id"/>
+            <column type="uuid" name="product_id"/>
+            <column type="money" name="purchase_line_price"/>
+            <column type="integer" name="purchase_line_quantity"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-2" author="virtadity">
+        <addPrimaryKey tableName="purchase_line" columnNames="purchase_id, product_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-3" author="virtadity">
+        <addNotNullConstraint tableName="purchase_line" columnName="purchase_line_price"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-4" author="virtadity">
+        <addNotNullConstraint tableName="purchase_line" columnName="purchase_line_quantity"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-5" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="purchase_line"
+                baseColumnNames="purchase_id"
+                constraintName="fk-purchase-line-purchase"
+                referencedTableName="purchase"
+                referencedColumnNames="purchase_id"
+        />
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-line-6" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="purchase_line"
+                baseColumnNames="product_id"
+                constraintName="fk-purchase-line-product"
+                referencedTableName="product"
+                referencedColumnNames="product_id"
+        />
+    </changeSet>
+</databaseChangeLog>

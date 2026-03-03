@@ -5,5 +5,5 @@ import com.virtadity.manease.domain.model.PurchaseLine;
 import java.util.UUID;
 
 public interface PurchaseLineCorrectOutputBoundary {
-    PurchaseLine execute(UUID purchaseId, UUID productId, PurchaseLine purchaseLine);
+    PurchaseLine correct(UUID purchaseId, UUID productId, PurchaseLine purchaseLine);
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-1" author="virtadity">
+        <createTable tableName="purchase">
+            <column type="uuid" name="purchase_id"/>
+            <column type="varchar(255)" name="purchase_description"/>
+            <column type="timestamp" name="purchase_creation_date"/>
+            <column type="timestamp" name="purchase_delivery_date"/>
+            <column type="uuid" name="producer_id"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-initial-schema-purchase-2" author="virtadity">
+        <addPrimaryKey tableName="purchase" columnNames="purchase_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-3" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-4" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_description"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-5" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_creation_date"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-6" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_delivery_date"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-purchase-7" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="purchase"
+                baseColumnNames="producer_id"
+                constraintName="fk_purchase_producer"
+                referencedTableName="producer"
+                referencedColumnNames="producer_id"
+        />
+    </changeSet>
+</databaseChangeLog>

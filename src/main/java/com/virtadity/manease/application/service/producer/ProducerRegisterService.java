@@ -18,7 +18,7 @@ public class ProducerRegisterService implements ProducerRegisterInputBoundary {
     @Override
     public ProducerResponse execute(ProducerRequest producerRequest) {
         var producer = producerMapper.toProducer(producerRequest);
-        var createdProducer = producerStorageRegister.execute(producer);
+        var createdProducer = producerStorageRegister.create(producer);
         return producerMapper.toProducerResponse(createdProducer);
     }
 }

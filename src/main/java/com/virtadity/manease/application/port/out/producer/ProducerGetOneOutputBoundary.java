@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ProducerGetOneOutputBoundary {
-    Optional<Producer> execute(UUID producerId);
+    Optional<Producer> getOne(UUID producerId);
 }

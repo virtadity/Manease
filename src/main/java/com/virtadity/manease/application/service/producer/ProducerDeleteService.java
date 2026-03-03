@@ -15,6 +15,6 @@ public class ProducerDeleteService implements ProducerDeleteInputBoundary {
 
     @Override
     public void execute(UUID producerId) {
-        producerStorageDelete.execute(producerId);
+        producerStorageDelete.delete(producerId);
     }
 }

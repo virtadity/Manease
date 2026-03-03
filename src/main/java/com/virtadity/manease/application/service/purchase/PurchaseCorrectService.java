@@ -20,7 +20,7 @@ public class PurchaseCorrectService implements PurchaseCorrectInputBoundary {
     @Override
     public PurchaseResponse execute(UUID purchaseId, PurchaseRequest purchaseRequest) {
         var purchase = purchaseMapper.toPurchase(purchaseRequest);
-        var correctedPurchase = purchaseStorageCorrect.execute(purchaseId, purchase);
+        var correctedPurchase = purchaseStorageCorrect.correct(purchaseId, purchase);
         return purchaseMapper.toPurchaseResponse(purchase);
     }
 }

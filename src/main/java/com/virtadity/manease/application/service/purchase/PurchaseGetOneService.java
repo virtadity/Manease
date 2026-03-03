@@ -18,7 +18,7 @@ public class PurchaseGetOneService implements PurchaseGetOneInputBoundary {
 
     @Override
     public Optional<PurchaseResponse> execute(UUID purchaseId) {
-        var purchase = purchaseStorageGetOne.execute(purchaseId);
+        var purchase = purchaseStorageGetOne.getOne(purchaseId);
         return purchase.map(purchaseMapper::toPurchaseResponse);
     }
 }

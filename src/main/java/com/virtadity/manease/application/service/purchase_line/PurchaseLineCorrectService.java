@@ -19,7 +19,7 @@ public class PurchaseLineCorrectService implements PurchaseLineCorrectInputBound
     @Override
     public PurchaseLineResponse execute(UUID purchaseId, UUID productId, PurchaseLineRequest purchaseLineRequest) {
         var purchaseLine = purchaseLineMapper.toPurchaseLine(purchaseLineRequest);
-        var correctedPurchaseLine = purchaseLineStorageCorrect.execute(purchaseId, productId, purchaseLine);
+        var correctedPurchaseLine = purchaseLineStorageCorrect.correct(purchaseId, productId, purchaseLine);
         return purchaseLineMapper.toPurchaseLineResponse(correctedPurchaseLine);
     }
 }

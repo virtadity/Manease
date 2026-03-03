@@ -17,7 +17,7 @@ public class ProductGetAllService implements ProductGetAllInputBoundary {
 
     @Override
     public List<ProductResponse> execute() {
-        var productsList = productStorageGetAll.execute();
+        var productsList = productStorageGetAll.getAll();
         return productMapper.toProductResponseList(productsList);
     }
 }

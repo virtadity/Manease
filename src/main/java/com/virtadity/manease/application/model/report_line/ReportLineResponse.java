@@ -8,7 +8,7 @@ public record ReportLineResponse(
         LocalDateTime deliveryDate,
         LocalDateTime creationDate,
         UUID supplyId,
-        BigDecimal totalSupplyWeight,
-        BigDecimal totalSupplyCost
+        BigDecimal totalPurchaseWeight,
+        BigDecimal totalPurchaseCost
 ) {
 }

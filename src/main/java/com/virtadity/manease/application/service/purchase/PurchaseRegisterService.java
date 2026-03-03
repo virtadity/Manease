@@ -17,7 +17,7 @@ public class PurchaseRegisterService implements PurchaseRegisterInputBoundary {
     @Override
     public PurchaseResponse execute(PurchaseRequest purchaseRequest) {
         var purchase = purchaseMapper.toPurchase(purchaseRequest);
-        var savedPurchase = purchaseStorageRegister.execute(purchase);
+        var savedPurchase = purchaseStorageRegister.create(purchase);
         return purchaseMapper.toPurchaseResponse(savedPurchase);
     }
 }

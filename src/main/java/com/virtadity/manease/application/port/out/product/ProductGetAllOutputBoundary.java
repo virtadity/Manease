@@ -5,5 +5,5 @@ import com.virtadity.manease.domain.model.Product;
 import java.util.List;
 
 public interface ProductGetAllOutputBoundary {
-    List<Product> execute();
+    List<Product> getAll();
 }

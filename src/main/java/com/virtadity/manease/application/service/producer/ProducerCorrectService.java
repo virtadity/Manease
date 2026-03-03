@@ -20,7 +20,7 @@ public class ProducerCorrectService implements ProducerCorrectInputBoundary {
     @Override
     public ProducerResponse execute(UUID productId, ProducerRequest productRequest) {
         var producer = producerMapper.toProducer(productRequest);
-        var correctedProducer = producerStorageCorrect.execute(productId, producer);
+        var correctedProducer = producerStorageCorrect.correct(productId, producer);
         return producerMapper.toProducerResponse(correctedProducer);
     }
 }

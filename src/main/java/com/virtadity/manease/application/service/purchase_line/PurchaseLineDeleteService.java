@@ -15,6 +15,6 @@ public class PurchaseLineDeleteService implements PurchaseLineDeleteInputBoundar
 
     @Override
     public void execute(UUID purchaseId, UUID productId) {
-        purchaseLineStorageDelete.execute(purchaseId, productId);
+        purchaseLineStorageDelete.delete(purchaseId, productId);
     }
 }

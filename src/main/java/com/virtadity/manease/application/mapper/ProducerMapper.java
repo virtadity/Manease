@@ -15,7 +15,6 @@ public interface ProducerMapper {
     @Mapping(
             source="producerId",
             target = "producerId",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
             defaultExpression = "java(UUID.randomUUID())"
     )
     Producer toProducer(ProducerRequest producerRequest);

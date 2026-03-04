@@ -15,7 +15,6 @@ public interface PurchaseMapper {
     @Mapping(
             source = "purchaseId",
             target = "purchaseId",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
             defaultExpression = "java(java(UUID.randomUUID())"
     )
     Purchase toPurchase(PurchaseRequest purchaseRequest);

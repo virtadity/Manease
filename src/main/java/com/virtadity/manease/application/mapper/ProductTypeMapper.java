@@ -15,7 +15,6 @@ public interface ProductTypeMapper {
     @Mapping(
             source = "productTypeId",
             target = "productTypeId",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
             defaultExpression = "java(UUID.randomUUID())"
     )
     ProductType toProductType(ProductTypeRequest producerTypeRequest);

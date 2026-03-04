@@ -15,7 +15,6 @@ public interface ProductMapper {
     @Mapping(
             source = "productId",
             target = "productId",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
             defaultExpression = "java(UUID.randomUUID())"
     )
     Product toProduct(ProductRequest productRequest);

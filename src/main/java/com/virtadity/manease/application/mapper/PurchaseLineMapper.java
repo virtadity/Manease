@@ -4,7 +4,6 @@ import com.virtadity.manease.application.model.purchase_line.PurchaseLineRequest
 import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
 import com.virtadity.manease.domain.model.PurchaseLine;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;

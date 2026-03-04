@@ -4,14 +4,21 @@ import com.virtadity.manease.application.model.product_type.ProductTypeRequest;
 import com.virtadity.manease.application.model.product_type.ProductTypeResponse;
 import com.virtadity.manease.domain.model.ProductType;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProductTypeMapper {
+    @Mapping(
+            source = "productTypeId",
+            target = "productTypeId",
+            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
+            defaultExpression = "java(UUID.randomUUID())"
+    )
     ProductType toProductType(ProductTypeRequest producerTypeRequest);
-    List<ProductType> toProductTypeList(List<ProductTypeRequest> productTypeRequestList);
 
     ProductTypeResponse toProductTypeResponse(ProductType productType);
     List<ProductTypeResponse> toProductTypeResponseList(List<ProductType> productTypeList);

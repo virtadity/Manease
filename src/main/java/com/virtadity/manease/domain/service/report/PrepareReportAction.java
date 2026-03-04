@@ -1,4 +1,4 @@
-package com.virtadity.manease.domain.service;
+package com.virtadity.manease.domain.service.report;
 
 import com.virtadity.manease.domain.model.Report;
 import com.virtadity.manease.domain.model.ReportLine;

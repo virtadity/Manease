@@ -4,19 +4,22 @@ import com.virtadity.manease.application.model.producer.ProducerRequest;
 import com.virtadity.manease.application.model.producer.ProducerResponse;
 import com.virtadity.manease.domain.model.Producer;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProducerMapper {
+    @Mapping(
+            source="producerId",
+            target = "producerId",
+            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
+            defaultExpression = "java(UUID.randomUUID())"
+    )
     Producer toProducer(ProducerRequest producerRequest);
-    List<Producer> toProducers(List<ProducerRequest> producerRequests);
-
     ProducerResponse toProducerResponse(Producer producer);
     List<ProducerResponse> toProducerResponseList(List<Producer> producers);
-
-;
-
 }
 

@@ -4,14 +4,21 @@ import com.virtadity.manease.application.model.purchase.PurchaseRequest;
 import com.virtadity.manease.application.model.purchase.PurchaseResponse;
 import com.virtadity.manease.domain.model.Purchase;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PurchaseMapper {
+    @Mapping(
+            source = "purchaseId",
+            target = "purchaseId",
+            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_DEFAULT,
+            defaultExpression = "java(java(UUID.randomUUID())"
+    )
     Purchase toPurchase(PurchaseRequest purchaseRequest);
-    List<Purchase> toPurchaseList(List<PurchaseRequest> purchaseRequestList);
 
     PurchaseResponse toPurchaseResponse(Purchase purchase);
     List<PurchaseResponse> toPurchaseResponseList(List<Purchase> purchaseList);

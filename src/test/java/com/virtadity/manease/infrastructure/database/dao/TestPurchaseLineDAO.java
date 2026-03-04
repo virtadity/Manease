@@ -130,4 +130,13 @@ public class TestPurchaseLineDAO {
                 .isEmpty();
     }
 
+    @Test
+    void testGetAllPurchaseLineOfPurchase() {
+        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
+        var purchaseLines = purchaseLineDAO.getAllOfPurchase(purchaseId);
+
+        assertThat(purchaseLines)
+                .isNotNull()
+                .isNotEmpty();
+    }
 }

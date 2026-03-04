@@ -27,7 +27,8 @@ public class PurchaseLineDAO implements
         PurchaseLineCorrectOutputBoundary,
         PurchaseLineGetAllOutputBoundary,
         PurchaseLineGetOneOutputBoundary,
-        PurchaseLineDeleteOutputBoundary
+        PurchaseLineDeleteOutputBoundary,
+        PurchaseLineGetAllOfPurchaseOutputBoundary
 {
     private final PurchaseLineEntityMapper purchaseLineEntityMapper;
     private final PurchaseLineRepository purchaseLineRepository;
@@ -109,5 +110,13 @@ public class PurchaseLineDAO implements
     public void delete(UUID purchaseId, UUID productId) {
         var purchaseLineId = new PurchaseLineId(purchaseId, productId);
         purchaseLineRepository.deleteById(purchaseLineId);
+    }
+
+    @Override
+    public List<PurchaseLine> getAllOfPurchase(UUID purchaseId) {
+        return purchaseLineEntityMapper
+                .toPurchaseLineList(
+                        purchaseLineRepository.getPurchaseLinesOfPurchase(purchaseId)
+                );
     }
 }

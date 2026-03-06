@@ -30,7 +30,7 @@ public class TestPurchaseGetAllService {
     @InjectMocks
     private PurchaseGetAllService purchaseGetAllService;
 
-    private List<UUID> purchaseIdList = List.of(
+    private final List<UUID> purchaseIdList = List.of(
             UUID.randomUUID(),
             UUID.randomUUID(),
             UUID.randomUUID(),
@@ -38,7 +38,7 @@ public class TestPurchaseGetAllService {
             UUID.randomUUID()
     );
 
-    private List<String> purchaseDescriptionList = List.of(
+    private final List<String> purchaseDescriptionList = List.of(
             "Test purchase 1",
             "Test purchase 2",
             "Test purchase 3",
@@ -46,7 +46,7 @@ public class TestPurchaseGetAllService {
             "Test purchase 5"
     );
 
-    private List<LocalDateTime> purchaseCreationDateList = List.of(
+    private final List<LocalDateTime> purchaseCreationDateList = List.of(
             LocalDateTime.now(),
             LocalDateTime.now(),
             LocalDateTime.now(),
@@ -54,7 +54,7 @@ public class TestPurchaseGetAllService {
             LocalDateTime.now()
     );
 
-    private List<LocalDateTime> purchaseDeliveryDateList = List.of(
+    private final List<LocalDateTime> purchaseDeliveryDateList = List.of(
             LocalDateTime.now(),
             LocalDateTime.now(),
             LocalDateTime.now(),
@@ -62,7 +62,7 @@ public class TestPurchaseGetAllService {
             LocalDateTime.now()
     );
 
-    private List<UUID> producerIdList = List.of(
+    private final List<UUID> producerIdList = List.of(
             UUID.randomUUID(),
             UUID.randomUUID(),
             UUID.randomUUID(),

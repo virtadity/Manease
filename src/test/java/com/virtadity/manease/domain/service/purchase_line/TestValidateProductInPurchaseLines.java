@@ -77,14 +77,15 @@ public class TestValidateProductInPurchaseLines {
         var productTypeId = UUID.randomUUID();
         var product = new Product(productId, productName, weight, productProducerId, productTypeId);
 
-        assertThrows(ProductIsAlreadyInPurchaseException.class, () -> {
-            ValidateProductInPurchaseLines.execute(purchaseLineList, product);
-        });
+        assertThrows(
+                ProductIsAlreadyInPurchaseException.class,
+                () -> ValidateProductInPurchaseLines.execute(purchaseLineList, product)
+        );
 
         var correctedProduct = new Product(UUID.randomUUID(), productName, weight, productProducerId, productTypeId);
 
-        assertDoesNotThrow(() -> {
-            ValidateProductInPurchaseLines.execute(purchaseLineList, correctedProduct);
-        });
+        assertDoesNotThrow(
+                () -> ValidateProductInPurchaseLines.execute(purchaseLineList, correctedProduct)
+        );
     }
 }

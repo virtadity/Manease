@@ -75,7 +75,7 @@ public class TestProductGetAllService {
     private List<ProductResponse> productResponseList;
 
     private void setUpProductList() {
-        this.productList = new ArrayList<Product>(productIdList.size());
+        this.productList = new ArrayList<>(productIdList.size());
         for (int index = 0; index < productIdList.size(); index++) {
             var product = new Product(
                     productIdList.get(index),
@@ -89,7 +89,7 @@ public class TestProductGetAllService {
     }
 
     private void setUpProductResponseList() {
-        this.productResponseList = new ArrayList<ProductResponse>(producerIdList.size());
+        this.productResponseList = new ArrayList<>(producerIdList.size());
         for (int index = 0; index < productIdList.size(); index++) {
             var productResponse = new ProductResponse(
                     productIdList.get(index),

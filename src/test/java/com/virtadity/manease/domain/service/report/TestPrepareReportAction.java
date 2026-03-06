@@ -60,7 +60,6 @@ public class TestPrepareReportAction {
     );
 
     private List<ReportLine> reportLineList;
-    private List<ReportLineResponse> reportLineResponseList;
 
     private void setUpReportLineList() {
         reportLineList = new ArrayList<>();

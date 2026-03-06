@@ -31,13 +31,14 @@ public class TestValidateProducerOfProductAndPurchase {
         var purchase = new Purchase(purchaseId, description, creationDate, deliveryDate, purchaseProducerId);
         var product = new Product(productId, productName, weight, productProducerId, productTypeId);
 
-        Assertions.assertThrows(ProducerIsDifferentException.class, () -> {
-            ValidateProducerOfProductAndPurchase.execute(purchase, product);
-        });
+        Assertions.assertThrows(
+                ProducerIsDifferentException.class,
+                () -> ValidateProducerOfProductAndPurchase.execute(purchase, product)
+        );
 
         var correctedProduct = new Product(productId, productName, weight, purchaseProducerId, productTypeId);
-        Assertions.assertDoesNotThrow(() -> {
-            ValidateProducerOfProductAndPurchase.execute(purchase, correctedProduct);
-        });
+        Assertions.assertDoesNotThrow(
+                () -> ValidateProducerOfProductAndPurchase.execute(purchase, correctedProduct)
+        );
     }
 }

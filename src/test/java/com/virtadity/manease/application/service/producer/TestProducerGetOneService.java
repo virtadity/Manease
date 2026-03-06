@@ -3,7 +3,9 @@ package com.virtadity.manease.application.service.producer;
 import com.virtadity.manease.application.mapper.ProducerMapper;
 import com.virtadity.manease.application.model.producer.ProducerResponse;
 import com.virtadity.manease.application.port.out.producer.ProducerGetOneOutputBoundary;
+import com.virtadity.manease.application.service.producer.exception.ProducerNotFoundException;
 import com.virtadity.manease.domain.model.Producer;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,10 +43,9 @@ public class TestProducerGetOneService {
         when(producerMapper.toProducerResponse(producer)).thenReturn(producerResponse);
 
         var actualProducerResponse = producerGetOneService.execute(producerId);
-        assertThat(actualProducerResponse).isNotNull().isEqualTo(Optional.of(producerResponse));
+        assertThat(actualProducerResponse).isNotNull().isEqualTo(producerResponse);
 
-        var emptyResult = producerGetOneService.execute(otherProducerId);
-        assertThat(emptyResult).isEmpty();
+        Assertions.assertThrows(ProducerNotFoundException.class, () -> producerGetOneService.execute(otherProducerId));
     }
 
 }

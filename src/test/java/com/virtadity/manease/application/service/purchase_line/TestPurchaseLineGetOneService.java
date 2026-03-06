@@ -3,7 +3,9 @@ package com.virtadity.manease.application.service.purchase_line;
 import com.virtadity.manease.application.mapper.PurchaseLineMapper;
 import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
 import com.virtadity.manease.application.port.out.purchase_line.PurchaseLineGetOneOutputBoundary;
+import com.virtadity.manease.application.service.purchase_line.exception.PurchaseLineNotFoundException;
 import com.virtadity.manease.domain.model.PurchaseLine;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,16 +48,13 @@ public class TestPurchaseLineGetOneService {
         var actualPurchaseResponse = purchaseLineGetOneService.execute(purchaseId, productId);
         assertThat(actualPurchaseResponse)
                 .isNotNull()
-                .isNotEmpty()
-                .isEqualTo(Optional.of(purchaseResponse));
+                .isEqualTo(purchaseResponse);
 
         var otherPurchaseId = UUID.randomUUID();
         var otherProductId = UUID.randomUUID();
         when(purchaseLineGetOneStorage.getOne(otherPurchaseId, otherProductId)).thenReturn(Optional.empty());
 
-        var emptyPurchaseResponse = purchaseLineGetOneService.execute(otherPurchaseId, otherProductId);
-        assertThat(emptyPurchaseResponse)
-                .isNotNull()
-                .isEmpty();
+        Assertions.assertThrows(PurchaseLineNotFoundException.class,
+                () -> purchaseLineGetOneService.execute(otherPurchaseId, otherProductId));
     }
 }

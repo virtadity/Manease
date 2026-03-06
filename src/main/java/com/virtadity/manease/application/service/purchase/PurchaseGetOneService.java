@@ -4,6 +4,7 @@ import com.virtadity.manease.application.mapper.PurchaseMapper;
 import com.virtadity.manease.application.model.purchase.PurchaseResponse;
 import com.virtadity.manease.application.port.in.purchase.PurchaseGetOneInputBoundary;
 import com.virtadity.manease.application.port.out.purchase.PurchaseGetOneOutputBoundary;
+import com.virtadity.manease.application.service.purchase.exception.PurchaseNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,10 @@ public class PurchaseGetOneService implements PurchaseGetOneInputBoundary {
     private final PurchaseMapper purchaseMapper;
 
     @Override
-    public Optional<PurchaseResponse> execute(UUID purchaseId) {
-        var purchase = purchaseStorageGetOne.getOne(purchaseId);
-        return purchase.map(purchaseMapper::toPurchaseResponse);
+    public PurchaseResponse execute(UUID purchaseId) {
+        var purchase = purchaseStorageGetOne
+                .getOne(purchaseId)
+                .orElseThrow(() -> PurchaseNotFoundException.withId(purchaseId));
+        return purchaseMapper.toPurchaseResponse(purchase);
     }
 }

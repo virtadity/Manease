@@ -3,7 +3,9 @@ package com.virtadity.manease.application.service.purchase;
 import com.virtadity.manease.application.mapper.PurchaseMapper;
 import com.virtadity.manease.application.model.purchase.PurchaseResponse;
 import com.virtadity.manease.application.port.out.purchase.PurchaseGetOneOutputBoundary;
+import com.virtadity.manease.application.service.purchase.exception.PurchaseNotFoundException;
 import com.virtadity.manease.domain.model.Purchase;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,12 +50,8 @@ public class TestPurchaseGetOneService {
         var actualPurchaseResponse = purchaseGetOneService.execute(purchaseId);
         assertThat(actualPurchaseResponse)
                 .isNotNull()
-                .isNotEmpty()
-                .isEqualTo(Optional.of(purchaseResponse));
+                .isEqualTo(purchaseResponse);
 
-        var emptyPurchaseResponse = purchaseGetOneService.execute(otherPurchaseId);
-        assertThat(emptyPurchaseResponse)
-                .isNotNull()
-                .isEmpty();
+        Assertions.assertThrows(PurchaseNotFoundException.class, () -> purchaseGetOneService.execute(otherPurchaseId));
     }
 }

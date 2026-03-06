@@ -3,7 +3,9 @@ package com.virtadity.manease.application.service.product;
 import com.virtadity.manease.application.mapper.ProductMapper;
 import com.virtadity.manease.application.model.product.ProductResponse;
 import com.virtadity.manease.application.port.out.product.ProductGetOneOutputBoundary;
+import com.virtadity.manease.application.service.product.exception.ProductNotFoundException;
 import com.virtadity.manease.domain.model.Product;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -47,9 +49,8 @@ public class TestProductGetOneService {
         when(productGetOneStorage.getOne(otherProductTypeId)).thenReturn(Optional.empty());
 
         var actualProductResponse = productGetOneService.execute(productId);
-        assertThat(actualProductResponse).isNotNull().isNotEmpty().isEqualTo(Optional.of(productResponse));
+        assertThat(actualProductResponse).isNotNull().isEqualTo(productResponse);
 
-        var emptyProductResponse = productGetOneService.execute(otherProductTypeId);
-        assertThat(emptyProductResponse).isNotNull().isEmpty();
+        Assertions.assertThrows(ProductNotFoundException.class, () -> productGetOneService.execute(otherProductTypeId));
     }
 }

@@ -4,6 +4,7 @@ import com.virtadity.manease.application.mapper.ProductTypeMapper;
 import com.virtadity.manease.application.model.product_type.ProductTypeResponse;
 import com.virtadity.manease.application.port.in.product_type.ProductTypeGetOneInputBoundary;
 import com.virtadity.manease.application.port.out.product_type.ProductTypeGetOneOutputBoundary;
+import com.virtadity.manease.application.service.product_type.exception.ProductTypeNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,10 @@ public class ProductTypeGetOneService implements ProductTypeGetOneInputBoundary 
     private final ProductTypeMapper productTypeMapper;
 
     @Override
-    public Optional<ProductTypeResponse> execute(UUID productTypeId) {
-        var productType = productTypeStorageGetOne.getOne(productTypeId);
-        return productType.map(productTypeMapper::toProductTypeResponse);
+    public ProductTypeResponse execute(UUID productTypeId) {
+        var productType = productTypeStorageGetOne
+                .getOne(productTypeId)
+                .orElseThrow(() -> ProductTypeNotFoundException.withId(productTypeId));
+        return productTypeMapper.toProductTypeResponse(productType);
     }
 }

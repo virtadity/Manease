@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ProductTypeGetOneInputBoundary {
-    Optional<ProductTypeResponse> execute(UUID productTypeId);
+    ProductTypeResponse execute(UUID productTypeId);
 }

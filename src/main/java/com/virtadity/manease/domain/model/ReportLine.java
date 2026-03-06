@@ -7,7 +7,7 @@ import java.util.UUID;
 public record ReportLine(
         LocalDateTime deliveryDate,
         LocalDateTime creationDate,
-        UUID supplyId,
+        UUID purchaseId,
         BigDecimal totalPurchaseWeight,
         BigDecimal totalPurchaseCost
 ) {

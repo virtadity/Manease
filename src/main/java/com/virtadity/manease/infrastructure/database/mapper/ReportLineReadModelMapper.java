@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ReportLineReadModelMapper {
 
-    @Mapping(source = "purchaseId", target = "supplyId")
+    @Mapping(source = "purchaseId", target = "purchaseId")
     ReportLine toReportLine(ReportLineReadModel reportLineReadModel);
 
-    @Mapping(source = "purchaseId", target = "supplyId")
+    @Mapping(source = "purchaseId", target = "purchaseId")
     List<ReportLine> toReportLineList(List<ReportLineReadModel> reportLineReadModelList);
 }

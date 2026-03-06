@@ -27,11 +27,11 @@ public interface PurchaseRepository extends JpaRepository<PurchaseEntity, UUID> 
                 purchase_line USING(purchase_id)
             INNER JOIN
                 product USING(product_id)
-            WHERE purchase_delivery_date BETWEEN :fromDate AND :toDate
+            WHERE purchase_delivery_date BETWEEN :afterDate AND :beforeDate
             GROUP BY purchase_id;
             """, nativeQuery = true)
     List<ReportLineReadModel> getReportLineBetweenDates(
-            @Param("fromDate") LocalDateTime fromDate,
-            @Param("toDate") LocalDateTime toDate
+            @Param("afterDate") LocalDateTime fromDate,
+            @Param("beforeDate") LocalDateTime toDate
     );
 }

@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record Report(
-        LocalDateTime fromDate,
-        LocalDateTime toDate,
+        LocalDateTime afterDate,
+        LocalDateTime beforeDate,
         BigDecimal totalCost,
         BigDecimal totalWeight,
         List<ReportLine> reportLineList

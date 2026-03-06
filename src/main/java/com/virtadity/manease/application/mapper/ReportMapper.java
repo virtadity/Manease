@@ -4,6 +4,7 @@ import com.virtadity.manease.application.model.report.ReportResponse;
 import com.virtadity.manease.domain.model.Report;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 
@@ -13,6 +14,6 @@ import org.mapstruct.MappingConstants;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR
 )
 public interface ReportMapper {
-
+    @Mapping(source = "reportLineList", target = "reportLineResponseList")
     ReportResponse toReportResponse(Report report);
 }

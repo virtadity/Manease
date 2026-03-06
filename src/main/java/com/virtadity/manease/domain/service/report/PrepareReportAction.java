@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PrepareReportAction {
 
-    public Report execute(List<ReportLine> reportLineList, LocalDateTime fromDate, LocalDateTime toDate) {
+    public Report execute(List<ReportLine> reportLineList, LocalDateTime afterDate, LocalDateTime beforeDate) {
         var totalCost = reportLineList
                 .parallelStream()
                 .map(ReportLine::totalPurchaseCost)
@@ -21,6 +21,6 @@ public class PrepareReportAction {
                 .map(ReportLine::totalPurchaseWeight)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return new Report(fromDate, toDate, totalCost, totalWeight, reportLineList);
+        return new Report(afterDate, beforeDate, totalCost, totalWeight, reportLineList);
     }
 }

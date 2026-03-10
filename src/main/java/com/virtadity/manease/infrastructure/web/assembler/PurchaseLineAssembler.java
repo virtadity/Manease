@@ -1,0 +1,35 @@
+package com.virtadity.manease.infrastructure.web.assembler;
+
+import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
+import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineResponseDTO;
+import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineMapper;
+import com.virtadity.manease.infrastructure.web.rest_controller.ProductController;
+import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseController;
+import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseLineController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+@RequiredArgsConstructor
+@Component
+public class PurchaseLineAssembler
+        implements RepresentationModelAssembler<PurchaseLineResponse, EntityModel<PurchaseLineResponseDTO>> {
+
+    private final PurchaseLineMapper purchaseLineMapper;
+
+    @Override
+    public EntityModel<PurchaseLineResponseDTO> toModel(PurchaseLineResponse purchaseLineResponse) {
+        var purchaseLineResponseDTO = purchaseLineMapper.toPurchaseLineResponseDTO(purchaseLineResponse);
+        return EntityModel.of(purchaseLineResponseDTO,
+                linkTo(methodOn(PurchaseLineController.class).getAll()).withRel("purchase_lines"),
+                linkTo(methodOn(PurchaseLineController.class)
+                        .getOne(purchaseLineResponse.purchaseId(), purchaseLineResponse.productId())).withSelfRel(),
+                linkTo(methodOn(PurchaseController.class).one(purchaseLineResponse.purchaseId())).withRel("purchase"),
+                linkTo(methodOn(ProductController.class).one(purchaseLineResponse.productId())).withRel("product")
+        );
+    }
+}

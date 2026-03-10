@@ -1,7 +1,7 @@
-package com.virtadity.manease.infrastructure.web.assembler.producer;
+package com.virtadity.manease.infrastructure.web.assembler;
 
 import com.virtadity.manease.application.model.producer.ProducerResponse;
-import com.virtadity.manease.infrastructure.web.controller.producer.ProducerController;
+import com.virtadity.manease.infrastructure.web.rest_controller.ProducerController;
 import com.virtadity.manease.infrastructure.web.dto.producer.ProducerResponseDTO;
 import com.virtadity.manease.infrastructure.web.mapper.ProducerMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +23,9 @@ public class ProducerAssembler implements
     @Override
     public EntityModel<ProducerResponseDTO> toModel(ProducerResponse producerResponse) {
         var producerResponseDTO = producerMapper.toProducerResponseDTO(producerResponse);
-        var model = EntityModel.of(producerResponseDTO,
-                linkTo(methodOn(ProducerController.class).all()).withRel("producers"));
 
-        return model;
+        return EntityModel.of(producerResponseDTO,
+                linkTo(methodOn(ProducerController.class).all()).withRel("producers"),
+                linkTo(methodOn(ProducerController.class).one(producerResponse.producerId())).withSelfRel());
     }
 }

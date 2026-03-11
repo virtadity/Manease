@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/product-types")
+@RequestMapping("/product_types")
 public class ProductTypeController {
 
     private final RepresentationModelAssembler<

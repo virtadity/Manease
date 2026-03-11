@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/producers")
 public class ProducerController {
 
     private final RepresentationModelAssembler<ProducerResponse, EntityModel<ProducerResponseDTO>> producerAssembler;

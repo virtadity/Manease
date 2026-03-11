@@ -27,9 +27,6 @@ public class TestReportService {
     @Mock
     private ReportLineOutputBoundary reportLineStorage;
 
-    @Mock
-    private PrepareReportAction prepareReportAction;
-
     @InjectMocks
     private ReportService reportService;
 
@@ -56,7 +53,6 @@ public class TestReportService {
 
         when(reportMapper.toReportResponse(report)).thenReturn(reportResponse);
         when(reportLineStorage.getAllBetweenDates(reportAfterDate, reportBeforeDate)).thenReturn(List.of());
-        when(prepareReportAction.execute(List.of(), reportAfterDate, reportBeforeDate)).thenReturn(report);
 
         var actualReportResponse = reportService.execute(reportAfterDate, reportBeforeDate);
         assertThat(actualReportResponse).isNotNull().isEqualTo(reportResponse);

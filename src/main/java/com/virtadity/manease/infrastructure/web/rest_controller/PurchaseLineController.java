@@ -4,7 +4,7 @@ import com.virtadity.manease.application.model.purchase_line.PurchaseLineRespons
 import com.virtadity.manease.application.port.in.purchase_line.*;
 import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineRequestDTO;
 import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineMapper;
+import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -24,7 +24,7 @@ public class PurchaseLineController {
             EntityModel<PurchaseLineResponseDTO>
             > purchaseLineAssembler;
 
-    private final PurchaseLineMapper purchaseLineMapper;
+    private final PurchaseLineDTOMapper purchaseLineDTOMapper;
     private final PurchaseLineGetOneInputBoundary getOneAction;
     private final PurchaseLineGetAllInputBoundary getAllAction;
     private final PurchaseLineRegisterInputBoundary registerAction;
@@ -48,7 +48,7 @@ public class PurchaseLineController {
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody PurchaseLineRequestDTO purchaseLineRequestDTO) {
-        var purchaseLineRequest = purchaseLineMapper.toPurchaseLineRequest(purchaseLineRequestDTO);
+        var purchaseLineRequest = purchaseLineDTOMapper.toPurchaseLineRequest(purchaseLineRequestDTO);
         var purchaseLineResponse = registerAction.execute(purchaseLineRequest);
         var purchaseLineModel = purchaseLineAssembler.toModel(purchaseLineResponse);
         var creationLocation = purchaseLineModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
@@ -61,7 +61,7 @@ public class PurchaseLineController {
             @RequestParam("product_id") UUID productId,
             @RequestBody PurchaseLineRequestDTO purchaseLineRequestDTO
     ) {
-        var purchaseLineRequest = purchaseLineMapper.toPurchaseLineRequest(purchaseLineRequestDTO);
+        var purchaseLineRequest = purchaseLineDTOMapper.toPurchaseLineRequest(purchaseLineRequestDTO);
         var purchaseLineResponse = correctAction.execute(purchaseId, productId, purchaseLineRequest);
         var purchaseLineModel = purchaseLineAssembler.toModel(purchaseLineResponse);
         var creationLocation = purchaseLineModel.getRequiredLink(IanaLinkRelations.SELF).toUri();

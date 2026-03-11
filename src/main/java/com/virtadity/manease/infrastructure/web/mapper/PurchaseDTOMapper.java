@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface PurchaseMapper {
+public interface PurchaseDTOMapper {
     @Mapping(source = "id", target = "purchaseId")
     PurchaseRequest toPurchaseRequest(PurchaseRequestDTO purchaseRequestDTO);
     @Mapping(source = "purchaseId", target = "id")

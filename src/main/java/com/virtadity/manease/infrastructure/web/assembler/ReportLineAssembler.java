@@ -1,6 +1,6 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
-import com.virtadity.manease.infrastructure.web.mapper.ReportLineMapper;
+import com.virtadity.manease.infrastructure.web.mapper.ReportLineDTOMapper;
 import com.virtadity.manease.application.model.report_line.ReportLineResponse;
 import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO;
 import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseController;
@@ -17,11 +17,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ReportLineAssembler
         implements RepresentationModelAssembler<ReportLineResponse, EntityModel<ReportLineResponseDTO>> {
 
-    private final ReportLineMapper reportLineMapper;
+    private final ReportLineDTOMapper reportLineDTOMapper;
 
     @Override
     public EntityModel<ReportLineResponseDTO> toModel(ReportLineResponse reportLineResponse) {
-        var reportLineResponseDTO = reportLineMapper.toReportLineResponseDTO(reportLineResponse);
+        var reportLineResponseDTO = reportLineDTOMapper.toReportLineResponseDTO(reportLineResponse);
         return EntityModel.of(reportLineResponseDTO,
                 linkTo(methodOn(PurchaseController.class).one(reportLineResponse.purchaseId())).withRel("purchase"));
     }

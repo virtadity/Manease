@@ -4,7 +4,7 @@ import com.virtadity.manease.application.model.producer.ProducerResponse;
 import com.virtadity.manease.application.port.in.producer.*;
 import com.virtadity.manease.infrastructure.web.dto.producer.ProducerRequestDTO;
 import com.virtadity.manease.infrastructure.web.dto.producer.ProducerResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.ProducerMapper;
+import com.virtadity.manease.infrastructure.web.mapper.ProducerDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ProducerController {
 
     private final RepresentationModelAssembler<ProducerResponse, EntityModel<ProducerResponseDTO>> producerAssembler;
-    private final ProducerMapper producerMapper;
+    private final ProducerDTOMapper producerDTOMapper;
     private final ProducerRegisterInputBoundary producerRegisterAction;
     private final ProducerGetOneInputBoundary getOneAction;
     private final ProducerGetAllInputBoundary getAllAction;
@@ -43,7 +43,7 @@ public class ProducerController {
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody ProducerRequestDTO producerRequestDTO) {
-        var producerRequest = producerMapper.toProducerRequest(producerRequestDTO);
+        var producerRequest = producerDTOMapper.toProducerRequest(producerRequestDTO);
         var producerResponse = producerRegisterAction.execute(producerRequest);
         var producerResponseModel = producerAssembler.toModel(producerResponse);
         var createdLocation = producerResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
@@ -55,7 +55,7 @@ public class ProducerController {
             @PathVariable("id") UUID producerId,
             @RequestBody ProducerRequestDTO producerRequestDTO
     ) {
-        var producerRequest = producerMapper.toProducerRequest(producerRequestDTO);
+        var producerRequest = producerDTOMapper.toProducerRequest(producerRequestDTO);
         var producerResponse = correctAction.execute(producerId, producerRequest);
         var producerResponseModel = producerAssembler.toModel(producerResponse);
         var createdLocation = producerResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();

@@ -10,12 +10,10 @@ import org.mapstruct.MappingConstants;
 
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface ProductTypeMapper {
+public interface ProductTypeDTOMapper {
     @Mapping(source = "id", target = "productTypeId")
-    @Mapping(source = "name", target = "productTypeName")
     ProductTypeRequest toProductTypeRequest(ProductTypeRequestDTO productTypeRequestDTO);
 
     @Mapping(source = "productTypeId", target = "id")
-    @Mapping(source = "productTypeName", target = "name")
     ProductTypeResponseDTO toProductTypeResponseDTO(ProductTypeResponse productTypeResponse);
 }

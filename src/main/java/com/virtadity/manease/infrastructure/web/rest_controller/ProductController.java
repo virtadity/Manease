@@ -4,7 +4,7 @@ import com.virtadity.manease.application.model.product.ProductResponse;
 import com.virtadity.manease.application.port.in.product.*;
 import com.virtadity.manease.infrastructure.web.dto.product.ProductRequestDTO;
 import com.virtadity.manease.infrastructure.web.dto.product.ProductResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.ProductMapper;
+import com.virtadity.manease.infrastructure.web.mapper.ProductDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequestMapping("/products")
 public class ProductController {
     private final RepresentationModelAssembler<ProductResponse, EntityModel<ProductResponseDTO>> productAssembler;
-    private final ProductMapper productMapper;
+    private final ProductDTOMapper productDTOMapper;
     private final ProductGetAllInputBoundary getAllAction;
     private final ProductGetOneInputBoundary getOneAction;
     private final ProductRegisterInputBoundary registerAction;
@@ -41,7 +41,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody ProductRequestDTO productRequestDTO) {
-        var productRequest = productMapper.toProductRequest(productRequestDTO);
+        var productRequest = productDTOMapper.toProductRequest(productRequestDTO);
         var productResponse = registerAction.execute(productRequest);
         var productModel = productAssembler.toModel(productResponse);
         var createdLocation = productModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
@@ -50,7 +50,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> correct(@PathVariable("id") UUID id, @RequestBody ProductRequestDTO productRequestDTO) {
-        var productRequest = productMapper.toProductRequest(productRequestDTO);
+        var productRequest = productDTOMapper.toProductRequest(productRequestDTO);
         var productResponse = correctAction.execute(id, productRequest);
         var productModel = productAssembler.toModel(productResponse);
         var createdLocation = productModel.getRequiredLink(IanaLinkRelations.SELF).toUri();

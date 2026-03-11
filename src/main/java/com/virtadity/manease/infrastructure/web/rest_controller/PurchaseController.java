@@ -4,7 +4,7 @@ import com.virtadity.manease.application.model.purchase.PurchaseResponse;
 import com.virtadity.manease.application.port.in.purchase.*;
 import com.virtadity.manease.infrastructure.web.dto.purchase.PurchaseRequestDTO;
 import com.virtadity.manease.infrastructure.web.dto.purchase.PurchaseResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.PurchaseMapper;
+import com.virtadity.manease.infrastructure.web.mapper.PurchaseDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequestMapping("/purchases")
 public class PurchaseController {
     private final RepresentationModelAssembler<PurchaseResponse, EntityModel<PurchaseResponseDTO>> purchaseAssembler;
-    private final PurchaseMapper purchaseMapper;
+    private final PurchaseDTOMapper purchaseDTOMapper;
     private final PurchaseGetAllInputBoundary getAllAction;
     private final PurchaseGetOneInputBoundary getOneAction;
     private final PurchaseRegisterInputBoundary registerAction;
@@ -42,7 +42,7 @@ public class PurchaseController {
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody PurchaseRequestDTO purchaseRequestDTO) {
-        var purchaseRequest = purchaseMapper.toPurchaseRequest(purchaseRequestDTO);
+        var purchaseRequest = purchaseDTOMapper.toPurchaseRequest(purchaseRequestDTO);
         var purchaseResponse = registerAction.execute(purchaseRequest);
         var purchaseModel = purchaseAssembler.toModel(purchaseResponse);
         var createdLocation = purchaseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
@@ -54,7 +54,7 @@ public class PurchaseController {
             @PathVariable("id") UUID purchaseId,
             @RequestBody PurchaseRequestDTO purchaseRequestDTO
     ) {
-        var purchaseRequest = purchaseMapper.toPurchaseRequest(purchaseRequestDTO);
+        var purchaseRequest = purchaseDTOMapper.toPurchaseRequest(purchaseRequestDTO);
         var purchaseResponse = correctAction.execute(purchaseId, purchaseRequest);
         var purchaseModel = purchaseAssembler.toModel(purchaseResponse);
         var createdLocation = purchaseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();

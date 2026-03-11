@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface ReportLineMapper {
+public interface ReportLineDTOMapper {
     ReportLineResponseDTO toReportLineResponseDTO(ReportLineResponse reportLineResponse);
 }

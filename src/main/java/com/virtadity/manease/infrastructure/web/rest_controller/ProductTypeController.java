@@ -4,7 +4,7 @@ import com.virtadity.manease.application.model.product_type.ProductTypeResponse;
 import com.virtadity.manease.application.port.in.product_type.*;
 import com.virtadity.manease.infrastructure.web.dto.product_type.ProductTypeRequestDTO;
 import com.virtadity.manease.infrastructure.web.dto.product_type.ProductTypeResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.ProductTypeMapper;
+import com.virtadity.manease.infrastructure.web.mapper.ProductTypeDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -24,7 +24,7 @@ public class ProductTypeController {
             ProductTypeResponse,
             EntityModel<ProductTypeResponseDTO>
             > productTypeAssembler;
-    private final ProductTypeMapper productTypeMapper;
+    private final ProductTypeDTOMapper productTypeDTOMapper;
     private final ProductTypeGetAllInputBoundary getAllAction;
     private final ProductTypeGetOneInputBoundary getOneAction;
     private final ProductTypeRegisterInputBoundary registerAction;
@@ -46,7 +46,7 @@ public class ProductTypeController {
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody ProductTypeRequestDTO productTypeRequestDTO) {
-        var productTypeRequest = productTypeMapper.toProductTypeRequest(productTypeRequestDTO);
+        var productTypeRequest = productTypeDTOMapper.toProductTypeRequest(productTypeRequestDTO);
         var productTypeResponse = registerAction.execute(productTypeRequest);
         var productTypeResponseModel = productTypeAssembler.toModel(productTypeResponse);
         var createdLocation = productTypeResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
@@ -58,7 +58,7 @@ public class ProductTypeController {
             @PathVariable("id") UUID productTypeId,
             @RequestBody ProductTypeRequestDTO productTypeRequestDTO
     ) {
-        var productTypeRequest = productTypeMapper.toProductTypeRequest(productTypeRequestDTO);
+        var productTypeRequest = productTypeDTOMapper.toProductTypeRequest(productTypeRequestDTO);
         var productTypeResponse = correctAction.execute(productTypeId, productTypeRequest);
         var productTypeResponseModel = productTypeAssembler.toModel(productTypeResponse);
         var createdLocation = productTypeResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();

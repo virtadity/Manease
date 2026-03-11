@@ -2,7 +2,7 @@ package com.virtadity.manease.infrastructure.web.assembler;
 
 import com.virtadity.manease.application.model.product.ProductResponse;
 import com.virtadity.manease.infrastructure.web.dto.product.ProductResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.ProductMapper;
+import com.virtadity.manease.infrastructure.web.mapper.ProductDTOMapper;
 import com.virtadity.manease.infrastructure.web.rest_controller.ProducerController;
 import com.virtadity.manease.infrastructure.web.rest_controller.ProductController;
 import com.virtadity.manease.infrastructure.web.rest_controller.ProductTypeController;
@@ -17,11 +17,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ProductAssembler implements
         RepresentationModelAssembler<ProductResponse, EntityModel<ProductResponseDTO>> {
 
-    private final ProductMapper productMapper;
+    private final ProductDTOMapper productDTOMapper;
 
     @Override
     public EntityModel<ProductResponseDTO> toModel(ProductResponse productResponse) {
-        var productResponseDTO = productMapper.toProductResponseDTO(productResponse);
+        var productResponseDTO = productDTOMapper.toProductResponseDTO(productResponse);
         return EntityModel.of(
                 productResponseDTO,
                 linkTo(methodOn(ProductController.class)

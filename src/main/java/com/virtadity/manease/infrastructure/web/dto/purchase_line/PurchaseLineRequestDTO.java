@@ -1,5 +1,6 @@
 package com.virtadity.manease.infrastructure.web.dto.purchase_line;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.BigInteger;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 public class PurchaseLineRequestDTO {
     private UUID purchaseId;
     private UUID productId;

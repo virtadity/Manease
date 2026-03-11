@@ -2,7 +2,7 @@ package com.virtadity.manease.infrastructure.web.assembler;
 
 import com.virtadity.manease.application.model.purchase.PurchaseResponse;
 import com.virtadity.manease.infrastructure.web.dto.purchase.PurchaseResponseDTO;
-import com.virtadity.manease.infrastructure.web.mapper.PurchaseMapper;
+import com.virtadity.manease.infrastructure.web.mapper.PurchaseDTOMapper;
 import com.virtadity.manease.infrastructure.web.rest_controller.ProducerController;
 import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseController;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class PurchaseAssembler implements
         RepresentationModelAssembler<PurchaseResponse, EntityModel<PurchaseResponseDTO>> {
 
-    private final PurchaseMapper purchaseMapper;
+    private final PurchaseDTOMapper purchaseDTOMapper;
 
     @Override
     public EntityModel<PurchaseResponseDTO> toModel(PurchaseResponse purchaseResponse) {
-        var purchaseResponseDTO = purchaseMapper.toPurchaseResponseDTO(purchaseResponse);
+        var purchaseResponseDTO = purchaseDTOMapper.toPurchaseResponseDTO(purchaseResponse);
         return EntityModel.of(
                 purchaseResponseDTO,
                 linkTo(methodOn(PurchaseController.class).one(purchaseResponse.purchaseId())).withSelfRel(),

@@ -38,7 +38,6 @@ public class TestReportAssembler {
     private ReportAssembler reportAssembler;
 
     private final ReportLineDTOMapper reportLineDTOMapper = new ReportLineDTOMapperImpl();
-    private ReportLineAssembler reportLineAssembler;
 
     private final List<ReportLineResponse> reportLineResponseList = List.of(
             new ReportLineResponse(
@@ -63,7 +62,7 @@ public class TestReportAssembler {
     @BeforeEach
     public void setUp() {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(new MockHttpServletRequest()));
-        reportLineAssembler = new ReportLineAssembler(reportLineDTOMapper);
+        ReportLineAssembler reportLineAssembler = new ReportLineAssembler(reportLineDTOMapper);
         reportAssembler = new ReportAssembler(reportDTOMapper, reportLineAssembler);
         reportLineResponseDTOCollectionModel = reportLineAssembler.toCollectionModel(reportLineResponseList);
     }

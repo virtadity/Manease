@@ -93,10 +93,10 @@ public class TestPrepareReportAction {
     void testPrepareReportAction() {
         var totalWeightExpected = sum(totalPurchaseWeightList);
         var totalCostExpected = sum(totalPurchaseCostList);
-        var beforeDate = LocalDateTime.now();
-        var afterDate = LocalDateTime.now();
+        var beforeDate = LocalDateTime.now().minusHours(15);
+        var afterDate = LocalDateTime.now().minusHours(30);
         var reportExpected = new Report(afterDate, beforeDate, totalCostExpected, totalWeightExpected, reportLineList);
-        var reportActual = prepareReportAction.execute(reportLineList, beforeDate, afterDate);
+        var reportActual = prepareReportAction.execute(reportLineList, afterDate, beforeDate);
         assertThat(reportActual).isNotNull().isEqualTo(reportExpected);
     }
 

@@ -17,7 +17,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ProductTypeAssembler implements
         RepresentationModelAssembler<ProductTypeResponse, EntityModel<ProductTypeResponseDTO>> {
 
-    private ProductTypeDTOMapper productTypeDTOMapper;
+    private final ProductTypeDTOMapper productTypeDTOMapper;
 
     @Override
     public EntityModel<ProductTypeResponseDTO> toModel(ProductTypeResponse productTypeResponse) {

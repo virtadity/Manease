@@ -5,10 +5,14 @@ import com.virtadity.manease.application.model.report_line.ReportLineResponse;
 import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO;
 import com.virtadity.manease.infrastructure.web.dto.report.ReportResponseDTO;
 import com.virtadity.manease.infrastructure.web.mapper.ReportDTOMapper;
+import com.virtadity.manease.infrastructure.web.rest_controller.ReportController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RequiredArgsConstructor
@@ -23,6 +27,10 @@ public class ReportAssembler implements RepresentationModelAssembler<ReportRespo
     public EntityModel<ReportResponseDTO> toModel(ReportResponse reportResponse) {
         var reportLines = reportLineAssembler.toCollectionModel(reportResponse.reportLineResponseList());
         var reportResponseDTO = reportDTOMapper.toReportResponseDTO(reportResponse, reportLines);
-        return EntityModel.of(reportResponseDTO);
+        return EntityModel.of(reportResponseDTO,
+                linkTo(
+                        methodOn(ReportController.class)
+                                .betweenDates(reportResponse.afterDate(), reportResponse.beforeDate())
+                ).withSelfRel());
     }
 }

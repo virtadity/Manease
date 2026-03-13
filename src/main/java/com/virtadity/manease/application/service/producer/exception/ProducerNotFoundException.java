@@ -1,10 +1,8 @@
 package com.virtadity.manease.application.service.producer.exception;
 
-import com.virtadity.manease.application.exception.BusinessException;
-
 import java.util.UUID;
 
-public class ProducerNotFoundException extends BusinessException {
+public class ProducerNotFoundException extends RuntimeException {
     public ProducerNotFoundException(String message) {
         super(message);
     }

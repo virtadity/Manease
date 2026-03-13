@@ -1,10 +1,8 @@
 package com.virtadity.manease.application.service.purchase_line.exception;
 
-import com.virtadity.manease.application.exception.BusinessException;
-
 import java.util.UUID;
 
-public class PurchaseLineNotFoundException extends BusinessException {
+public class PurchaseLineNotFoundException extends RuntimeException {
     public PurchaseLineNotFoundException(String message) {
         super(message);
     }

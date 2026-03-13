@@ -1,10 +1,8 @@
 package com.virtadity.manease.application.service.product_type.exception;
 
-import com.virtadity.manease.application.exception.BusinessException;
-
 import java.util.UUID;
 
-public class ProductTypeNotFoundException extends BusinessException {
+public class ProductTypeNotFoundException extends RuntimeException {
     public ProductTypeNotFoundException(String message) {
         super(message);
     }

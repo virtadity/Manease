@@ -2,7 +2,7 @@ package com.virtadity.manease.application.exception;
 
 import java.util.UUID;
 
-public class ProductDoesNotExistException extends BusinessException {
+public class ProductDoesNotExistException extends RuntimeException {
     public ProductDoesNotExistException(String message) {
         super(message);
     }

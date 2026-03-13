@@ -2,7 +2,7 @@ package com.virtadity.manease.infrastructure.database.dao;
 
 import com.virtadity.manease.application.port.out.purchase.*;
 import com.virtadity.manease.domain.model.Purchase;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProducerNotFoundException;
+import com.virtadity.manease.infrastructure.database.dao.exception.ProducerEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.entity.ProducerEntity;
 import com.virtadity.manease.infrastructure.database.mapper.PurchaseEntityMapper;
 import com.virtadity.manease.infrastructure.database.repository.ProducerRepository;
@@ -70,7 +70,7 @@ public class PurchaseDAO implements
         return producerRepository
                 .findById(producerId)
                 .orElseThrow(
-                        () -> ProducerNotFoundException.withSuchId(producerId)
+                        () -> ProducerEntityNotFoundException.withSuchId(producerId)
                 );
     }
 }

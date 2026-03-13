@@ -2,12 +2,11 @@ package com.virtadity.manease.infrastructure.database.dao;
 
 import com.virtadity.manease.application.port.out.purchase_line.*;
 import com.virtadity.manease.domain.model.PurchaseLine;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProductNotFoundException;
-import com.virtadity.manease.infrastructure.database.dao.exception.PurchaseNotFoundException;
+import com.virtadity.manease.infrastructure.database.dao.exception.ProductEntityNotFoundException;
+import com.virtadity.manease.infrastructure.database.dao.exception.PurchaseEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.entity.ProductEntity;
 import com.virtadity.manease.infrastructure.database.entity.PurchaseEntity;
 import com.virtadity.manease.infrastructure.database.entity.PurchaseLineId;
-import com.virtadity.manease.infrastructure.database.mapper.ProductEntityMapper;
 import com.virtadity.manease.infrastructure.database.mapper.PurchaseLineEntityMapper;
 import com.virtadity.manease.infrastructure.database.repository.ProductRepository;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseLineRepository;
@@ -57,13 +56,13 @@ public class PurchaseLineDAO implements
     private PurchaseEntity getPurchaseEntityById(UUID purchaseId) {
         return purchaseRepository
                 .findById(purchaseId)
-                .orElseThrow(() -> PurchaseNotFoundException.withSuchId(purchaseId));
+                .orElseThrow(() -> PurchaseEntityNotFoundException.withSuchId(purchaseId));
     }
 
     private ProductEntity getProductEntityById(UUID productId) {
         return productRepository
                 .findById(productId)
-                .orElseThrow(() -> ProductNotFoundException.withSuchId(productId));
+                .orElseThrow(() -> ProductEntityNotFoundException.withSuchId(productId));
     }
 
     @Transactional

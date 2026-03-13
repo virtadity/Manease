@@ -2,8 +2,8 @@ package com.virtadity.manease.infrastructure.database.dao;
 
 import com.virtadity.manease.application.port.out.product.*;
 import com.virtadity.manease.domain.model.Product;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProducerNotFoundException;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProductTypeNotFoundException;
+import com.virtadity.manease.infrastructure.database.dao.exception.ProducerEntityNotFoundException;
+import com.virtadity.manease.infrastructure.database.dao.exception.ProductTypeEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.entity.ProducerEntity;
 import com.virtadity.manease.infrastructure.database.entity.ProductTypeEntity;
 import com.virtadity.manease.infrastructure.database.mapper.ProductEntityMapper;
@@ -77,7 +77,7 @@ public class ProductDAO implements
         return this.producerRepository
                 .findById(producerId)
                 .orElseThrow(
-                        () -> ProducerNotFoundException.withSuchId(producerId)
+                        () -> ProducerEntityNotFoundException.withSuchId(producerId)
                 );
     }
 
@@ -85,7 +85,7 @@ public class ProductDAO implements
         return this.productTypeRepository
                 .findById(productTypeId)
                 .orElseThrow(
-                        () -> ProductTypeNotFoundException.withSuchId(productTypeId)
+                        () -> ProductTypeEntityNotFoundException.withSuchId(productTypeId)
                 );
     }
 }

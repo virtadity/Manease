@@ -7,12 +7,6 @@ import com.virtadity.manease.application.service.product.exception.ProductNotFou
 import com.virtadity.manease.application.service.product_type.exception.ProductTypeNotFoundException;
 import com.virtadity.manease.application.service.purchase.exception.PurchaseNotFoundException;
 import com.virtadity.manease.application.service.purchase_line.exception.PurchaseLineNotFoundException;
-import com.virtadity.manease.domain.service.purchase.validation.exception.ProducerIsDifferentException;
-import com.virtadity.manease.domain.service.purchase_line.validation.exception.ProductIsAlreadyInPurchaseException;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProducerEntityNotFoundException;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProductEntityNotFoundException;
-import com.virtadity.manease.infrastructure.database.dao.exception.ProductTypeEntityNotFoundException;
-import com.virtadity.manease.infrastructure.database.dao.exception.PurchaseEntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,74 +56,6 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ) {
         return buildResponse(HttpStatus.NOT_FOUND, purchaseLineNotFoundException.getMessage(), request);
-    }
-
-    @ExceptionHandler(ProducerIsDifferentException.class)
-    public ResponseEntity<ErrorResponse> handleProducerIsDifferent(
-            ProducerIsDifferentException producerIsDifferentException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(HttpStatus.UNPROCESSABLE_CONTENT, producerIsDifferentException.getMessage(), request);
-    }
-
-    @ExceptionHandler(ProductIsAlreadyInPurchaseException.class)
-    public ResponseEntity<ErrorResponse> handleProductIsAlreadyInPurchase(
-            ProductIsAlreadyInPurchaseException productIsAlreadyInPurchaseException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(
-                HttpStatus.UNPROCESSABLE_CONTENT,
-                productIsAlreadyInPurchaseException.getMessage(),
-                request
-        );
-    }
-
-    @ExceptionHandler(ProducerEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProducerEntityNotFound(
-            ProducerEntityNotFoundException producerEntityNotFoundException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(
-                HttpStatus.UNPROCESSABLE_CONTENT,
-                producerEntityNotFoundException.getMessage(),
-                request
-        );
-    }
-
-    @ExceptionHandler(ProductEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductEntityNotFound(
-            ProductEntityNotFoundException productEntityNotFoundException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(
-                HttpStatus.UNPROCESSABLE_CONTENT,
-                productEntityNotFoundException.getMessage(),
-                request
-        );
-    }
-
-    @ExceptionHandler(ProductTypeEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductTypeEntityNotFound(
-            ProductTypeEntityNotFoundException productTypeEntityNotFoundException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(
-                HttpStatus.UNPROCESSABLE_CONTENT,
-                productTypeEntityNotFoundException.getMessage(),
-                request
-        );
-    }
-
-    @ExceptionHandler(PurchaseEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePurchaseEntityNotFound(
-            PurchaseEntityNotFoundException purchaseEntityNotFoundException,
-            HttpServletRequest request
-    ) {
-        return buildResponse(
-                HttpStatus.UNPROCESSABLE_CONTENT,
-                purchaseEntityNotFoundException.getMessage(),
-                request
-        );
     }
 
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message, HttpServletRequest request) {

@@ -13,6 +13,7 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,13 +25,7 @@ import java.util.List;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(
-        {
-                AppTestContainersConfig.class,
-                ReportLineDAO.class,
-                ReportLineReadModelMapperImpl.class
-        }
-)
+@Import(PersistenceTestSetting.class)
 public class TestReportLineDAO {
 
     @Autowired

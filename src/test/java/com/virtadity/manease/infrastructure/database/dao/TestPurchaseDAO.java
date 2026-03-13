@@ -9,6 +9,7 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,13 +20,7 @@ import java.util.UUID;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(
-        {
-                AppTestContainersConfig.class,
-                PurchaseDAO.class,
-                PurchaseEntityMapperImpl.class
-        }
-)
+@Import(PersistenceTestSetting.class)
 public class TestPurchaseDAO {
 
     @Autowired

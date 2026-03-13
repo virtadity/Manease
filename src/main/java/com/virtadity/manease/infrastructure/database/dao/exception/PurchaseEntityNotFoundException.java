@@ -1,8 +1,10 @@
 package com.virtadity.manease.infrastructure.database.dao.exception;
 
+import com.virtadity.manease.application.exception.BusinessException;
+
 import java.util.UUID;
 
-public class PurchaseEntityNotFoundException extends RuntimeException {
+public class PurchaseEntityNotFoundException extends BusinessException {
     public PurchaseEntityNotFoundException(String message) {
         super(message);
     }

@@ -1,8 +1,10 @@
 package com.virtadity.manease.infrastructure.database.dao.exception;
 
+import com.virtadity.manease.application.exception.BusinessException;
+
 import java.util.UUID;
 
-public class ProductEntityNotFoundException extends RuntimeException {
+public class ProductEntityNotFoundException extends BusinessException {
     public ProductEntityNotFoundException(String message) {
         super(message);
     }

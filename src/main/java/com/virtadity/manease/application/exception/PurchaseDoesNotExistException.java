@@ -2,7 +2,7 @@ package com.virtadity.manease.application.exception;
 
 import java.util.UUID;
 
-public class PurchaseDoesNotExistException extends RuntimeException {
+public class PurchaseDoesNotExistException extends BusinessException {
     public PurchaseDoesNotExistException(String message) {
         super(message);
     }

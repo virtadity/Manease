@@ -1,8 +1,10 @@
 package com.virtadity.manease.application.service.purchase.exception;
 
+import com.virtadity.manease.application.exception.BusinessException;
+
 import java.util.UUID;
 
-public class PurchaseNotFoundException extends RuntimeException {
+public class PurchaseNotFoundException extends BusinessException {
     public PurchaseNotFoundException(String message) {
         super(message);
     }

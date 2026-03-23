@@ -20,17 +20,14 @@ import java.util.UUID;
 @RequestMapping("/product_types")
 public class ProductTypeController {
 
-    private final RepresentationModelAssembler<
-            ProductTypeResponse,
-            EntityModel<ProductTypeResponseDTO>
-            > productTypeAssembler;
     private final ProductTypeDTOMapper productTypeDTOMapper;
     private final ProductTypeGetAllInputBoundary getAllAction;
     private final ProductTypeGetOneInputBoundary getOneAction;
     private final ProductTypeRegisterInputBoundary registerAction;
     private final ProductTypeCorrectInputBoundary correctAction;
     private final ProductTypeDeleteInputBoundary deleteAction;
-
+    private final RepresentationModelAssembler<ProductTypeResponse, EntityModel<ProductTypeResponseDTO>>
+            productTypeAssembler;
 
     @GetMapping
     public CollectionModel<EntityModel<ProductTypeResponseDTO>> all() {
@@ -50,7 +47,7 @@ public class ProductTypeController {
         var productTypeResponse = registerAction.execute(productTypeRequest);
         var productTypeResponseModel = productTypeAssembler.toModel(productTypeResponse);
         var createdLocation = productTypeResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
-        return ResponseEntity.created(createdLocation).body(productTypeRequestDTO);
+        return ResponseEntity.created(createdLocation).body(productTypeResponseModel);
     }
 
     @PutMapping("/{id}")
@@ -62,7 +59,7 @@ public class ProductTypeController {
         var productTypeResponse = correctAction.execute(productTypeId, productTypeRequest);
         var productTypeResponseModel = productTypeAssembler.toModel(productTypeResponse);
         var createdLocation = productTypeResponseModel.getRequiredLink(IanaLinkRelations.SELF).toUri();
-        return ResponseEntity.created(createdLocation).body(productTypeRequestDTO);
+        return ResponseEntity.created(createdLocation).body(productTypeResponseModel);
     }
 
     @DeleteMapping("/{id}")

@@ -5,13 +5,14 @@ import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO
 import com.virtadity.manease.infrastructure.web.dto.report.ReportResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+
+import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ReportDTOMapper {
     ReportResponseDTO toReportResponseDTO(
             ReportResponse reportResponse,
-            CollectionModel<EntityModel<ReportLineResponseDTO>> reportLines
+            List<EntityModel<ReportLineResponseDTO>> reportLines
     );
 }

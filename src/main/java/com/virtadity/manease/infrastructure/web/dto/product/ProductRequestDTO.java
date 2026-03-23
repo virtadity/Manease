@@ -1,5 +1,6 @@
 package com.virtadity.manease.infrastructure.web.dto.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,6 +13,6 @@ public class ProductRequestDTO {
     private UUID id;
     private String name;
     private BigDecimal weight;
-    private UUID producerId;
-    private UUID productTypeId;
+    @JsonProperty("producer_id") private UUID producerId;
+    @JsonProperty("product_type_id") private UUID productTypeId;
 }

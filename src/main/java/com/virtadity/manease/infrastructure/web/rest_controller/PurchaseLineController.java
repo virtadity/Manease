@@ -37,7 +37,7 @@ public class PurchaseLineController {
         return purchaseLineAssembler.toCollectionModel(purchaseLineResponseList);
     }
 
-    @GetMapping("/purchaseLine")
+    @GetMapping("/purchase_line")
     public EntityModel<PurchaseLineResponseDTO> getOne(
             @RequestParam("purchase_id") UUID purchaseId,
             @RequestParam("product_id") UUID productId

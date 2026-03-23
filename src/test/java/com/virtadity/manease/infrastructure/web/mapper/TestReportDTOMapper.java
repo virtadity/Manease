@@ -7,7 +7,6 @@ import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO
 import com.virtadity.manease.infrastructure.web.dto.report.ReportResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -40,14 +39,14 @@ public class TestReportDTOMapper {
             )
     );
 
-    private CollectionModel<EntityModel<ReportLineResponseDTO>> reportLineResponseDTOCollectionModel;
+    private List<EntityModel<ReportLineResponseDTO>> reportLineResponseEntityModelList;
     private final ReportLineDTOMapper reportLineDTOMapper = new ReportLineDTOMapperImpl();
 
     @BeforeEach
     public void setUp() {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(new MockHttpServletRequest()));
         ReportLineAssembler reportLineAssembler = new ReportLineAssembler(reportLineDTOMapper);
-        reportLineResponseDTOCollectionModel = reportLineAssembler.toCollectionModel(reportResponseList);
+        reportLineResponseEntityModelList = reportResponseList.stream().map(reportLineAssembler::toModel).toList();
         RequestContextHolder.resetRequestAttributes();
     }
 
@@ -71,15 +70,15 @@ public class TestReportDTOMapper {
                 beforeDate,
                 totalCost,
                 totalWeight,
-                reportLineResponseDTOCollectionModel
+                reportLineResponseEntityModelList
         );
 
         var actualResponseDTO = reportDTOMapper.toReportResponseDTO(
                 reportResponse,
-                reportLineResponseDTOCollectionModel
+                reportLineResponseEntityModelList
         );
 
         assertThat(actualResponseDTO).isNotNull().isEqualTo(reportResponseDTO);
-        assertThat(actualResponseDTO.getReportLines()).isNotNull().isEqualTo(reportLineResponseDTOCollectionModel);
+        assertThat(actualResponseDTO.getReportLines()).isNotNull().isEqualTo(reportLineResponseEntityModelList);
     }
 }

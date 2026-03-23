@@ -25,7 +25,7 @@ public class ReportAssembler implements RepresentationModelAssembler<ReportRespo
 
     @Override
     public EntityModel<ReportResponseDTO> toModel(ReportResponse reportResponse) {
-        var reportLines = reportLineAssembler.toCollectionModel(reportResponse.reportLineResponseList());
+        var reportLines = reportResponse.reportLineResponseList().stream().map(reportLineAssembler::toModel).toList();
         var reportResponseDTO = reportDTOMapper.toReportResponseDTO(reportResponse, reportLines);
         return EntityModel.of(reportResponseDTO,
                 linkTo(

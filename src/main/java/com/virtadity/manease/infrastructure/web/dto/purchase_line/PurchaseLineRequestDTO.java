@@ -1,5 +1,6 @@
 package com.virtadity.manease.infrastructure.web.dto.purchase_line;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,7 +11,9 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class PurchaseLineRequestDTO {
+    @JsonProperty("purchase_id")
     private UUID purchaseId;
+    @JsonProperty("product_id")
     private UUID productId;
     private BigDecimal price;
     private BigInteger quantity;

@@ -57,14 +57,14 @@ public class TestReportAssembler {
             )
     );
 
-    private CollectionModel<EntityModel<ReportLineResponseDTO>> reportLineResponseDTOCollectionModel;
+    private List<EntityModel<ReportLineResponseDTO>> reportLineResponseDTOEntityModelList;
 
     @BeforeEach
     public void setUp() {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(new MockHttpServletRequest()));
         ReportLineAssembler reportLineAssembler = new ReportLineAssembler(reportLineDTOMapper);
         reportAssembler = new ReportAssembler(reportDTOMapper, reportLineAssembler);
-        reportLineResponseDTOCollectionModel = reportLineAssembler.toCollectionModel(reportLineResponseList);
+        reportLineResponseDTOEntityModelList = reportLineResponseList.stream().map(reportLineAssembler::toModel).toList();
     }
 
     @AfterEach
@@ -92,15 +92,15 @@ public class TestReportAssembler {
                 beforeDate,
                 totalCost,
                 totalWeight,
-                reportLineResponseDTOCollectionModel
+                reportLineResponseDTOEntityModelList
         );
 
-        when(reportDTOMapper.toReportResponseDTO(reportResponse, reportLineResponseDTOCollectionModel))
+        when(reportDTOMapper.toReportResponseDTO(reportResponse, reportLineResponseDTOEntityModelList))
                 .thenReturn(reportResponseDTO);
 
         var reportModel = reportAssembler.toModel(reportResponse);
 
-        assertThat(reportModel.getContent().getReportLines()).isNotNull().isEqualTo(reportLineResponseDTOCollectionModel);
+        assertThat(reportModel.getContent().getReportLines()).isNotNull().isEqualTo(reportLineResponseDTOEntityModelList);
         assertThat(reportModel.getContent().getAfterDate()).isNotNull().isEqualTo(afterDate);
         assertThat(reportModel.getContent().getBeforeDate()).isNotNull().isEqualTo(beforeDate);
         assertThat(reportModel.getContent().getTotalCost()).isNotNull().isEqualTo(totalCost);

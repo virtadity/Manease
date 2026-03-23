@@ -1,5 +1,6 @@
-Manease
+*Manease*\
 A Spring Boot-based RESTful service for managing purchases and generating aggregated supplier reports. \
+
 🚀 Key Features
 * RESTful API: Full CRUD for Purchases and Producers using Spring HATEOAS (HAL format).
 * Reporting: Aggregated data processing to generate detailed reports (totals by producer/item).
@@ -32,8 +33,8 @@ To run tests locally:
 ./gradlew test
 ```
 
-📝 Implementation Details (Highlights) \
-Domain-Driven Approach: Business logic is separated from infrastructure and web layers. \
-Optimized Reporting: Aggregation logic is handled via JPA/Hibernate to minimize memory footprint. \
-Resilient Infrastructure: Docker Compose uses healthcheck to ensure the application starts only after the database is ready. \
-HATEOAS Integration: Discoverable API with _links and _embedded collections for better frontend integration.
+📝 Implementation Details
+* Domain-Driven Approach: Business logic is separated from infrastructure and web layers. 
+* Optimized Reporting: Aggregation logic is handled via JPA/Hibernate to minimize memory footprint. 
+* Resilient Infrastructure: Docker Compose uses healthcheck to ensure the application starts only after the database is ready. 
+* HATEOAS Integration: Discoverable API with _links and _embedded collections for better frontend integration.

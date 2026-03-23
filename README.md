@@ -1,5 +1,5 @@
 *Manease*\
-A Spring Boot-based RESTful service for managing purchases and generating aggregated supplier reports. \
+A Spring Boot-based RESTful service for managing purchases and generating aggregated supplier reports.
 
 🚀 Key Features
 * RESTful API: Full CRUD for Purchases and Producers using Spring HATEOAS (HAL format).
@@ -27,7 +27,7 @@ docker-compose up --build
 The API will be available at http://localhost:8080.
 
 🧪 Testing
-Integration tests are implemented using Testcontainers to ensure environment consistency. \
+Integration tests are implemented using Testcontainers to ensure environment consistency.
 To run tests locally:
 ```
 ./gradlew test

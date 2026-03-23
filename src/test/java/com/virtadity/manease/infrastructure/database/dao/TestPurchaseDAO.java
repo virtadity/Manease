@@ -1,15 +1,13 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.AppTestContainersConfig;
+import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.Purchase;
-import com.virtadity.manease.infrastructure.database.mapper.PurchaseEntityMapperImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,10 +15,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-@DataJpaTest
-@ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceTestSetting.class)
+@ActiveProfiles("test")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TestPurchaseDAO {
 
     @Autowired

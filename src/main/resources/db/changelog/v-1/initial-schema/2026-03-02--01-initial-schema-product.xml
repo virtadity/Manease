@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="2026-03-02--01-initial-schema-product-1" author="virtadity">
-        <createTable tableName="product">
+        <createTable tableName="product" ifNotExists="true">
             <column type="uuid" name="product_id"/>
             <column type="varchar(255)" name="product_name"/>
             <column type="decimal(10, 2)" name="product_weight"/>

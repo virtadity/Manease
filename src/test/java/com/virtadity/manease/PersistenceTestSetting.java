@@ -1,9 +1,13 @@
-package com.virtadity.manease.infrastructure.database.dao;
+package com.virtadity.manease;
 
-import com.virtadity.manease.AppTestContainersConfig;
+import com.virtadity.manease.infrastructure.database.dao.*;
 import com.virtadity.manease.infrastructure.database.mapper.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 @TestConfiguration
 @Import(

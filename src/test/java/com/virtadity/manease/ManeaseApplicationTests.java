@@ -3,9 +3,12 @@ package com.virtadity.manease;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
-@Import(AppTestContainersConfig.class)
+
 @SpringBootTest
+@Import(AppTestContainersConfig.class)
+@ActiveProfiles("test")
 class ManeaseApplicationTests {
 
 	@Test

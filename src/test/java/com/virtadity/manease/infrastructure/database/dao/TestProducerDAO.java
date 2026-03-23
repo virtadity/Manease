@@ -1,5 +1,7 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
+import com.virtadity.manease.ManeaseApplication;
+import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.Producer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Optional;
 import java.util.UUID;
 
-@DataJpaTest
-@ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceTestSetting.class)
+@ActiveProfiles("test")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TestProducerDAO {
 
     @Autowired

@@ -1,9 +1,8 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.AppTestContainersConfig;
+import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.ReportLine;
 import com.virtadity.manease.infrastructure.database.entity.PurchaseLineEntity;
-import com.virtadity.manease.infrastructure.database.mapper.ReportLineReadModelMapperImpl;
 import com.virtadity.manease.infrastructure.database.repository.ProductRepository;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseLineRepository;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseRepository;
@@ -13,19 +12,17 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@DataJpaTest
-@ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceTestSetting.class)
+@ActiveProfiles("test")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TestReportLineDAO {
 
     @Autowired

@@ -5,14 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="2026-03-02--01-initial-schema-producer-1" author="virtadity">
-        <createTable tableName="producer">
+        <createTable tableName="producer" ifNotExists="true">
             <column type="uuid" name="producer_id"/>
             <column type="varchar(255)" name="producer_name"/>
         </createTable>
     </changeSet>
 
     <changeSet id="2026-03-02--01-initial-schema-producer-2" author="virtadity">
-        <addPrimaryKey tableName="producer" columnNames="producer_id"/>
+        <addPrimaryKey tableName="producer" columnNames="producer_id" />
     </changeSet>
 
     <changeSet id="2026-03-02--01-initial-schema-producer-3" author="virtadity">

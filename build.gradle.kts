@@ -8,6 +8,7 @@ group = "com.virtadity"
 version = "0.0.1-SNAPSHOT"
 description = "This is the sample of a simple SRM."
 
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-initial-schema-producer-1" author="virtadity">
+        <createTable tableName="producer" ifNotExists="true">
+            <column type="uuid" name="producer_id"/>
+            <column type="varchar(255)" name="producer_name"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-producer-2" author="virtadity">
+        <addPrimaryKey tableName="producer" columnNames="producer_id" />
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-producer-3" author="virtadity">
+        <addNotNullConstraint tableName="producer" columnName="producer_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-producer-4" author="virtadity">
+        <addNotNullConstraint tableName="producer" columnName="producer_name"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-producer-5" author="virtadity">
+        <addUniqueConstraint tableName="producer" columnNames="producer_name"/>
+    </changeSet>
+
+</databaseChangeLog>

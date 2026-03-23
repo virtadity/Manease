@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-initial-schema-product-type-1" author="virtadity">
+        <createTable tableName="product_type" ifNotExists="true">
+            <column type="uuid" name="product_type_id"/>
+            <column type="varchar(255)" name="product_type_name"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-type-2" author="virtadity">
+        <addPrimaryKey tableName="product_type" columnNames="product_type_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-type-3" author="virtadity">
+        <addNotNullConstraint tableName="product_type" columnName="product_type_id"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-type-4" author="virtadity">
+        <addNotNullConstraint tableName="product_type" columnName="product_type_name"/>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-initial-schema-product-type-5" author="virtadity">
+        <addUniqueConstraint tableName="product_type" columnNames="product_type_name"/>
+    </changeSet>
+
+</databaseChangeLog>

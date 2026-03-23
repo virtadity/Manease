@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-03--01-purchase-line-insert-data-1" author="virtadity">
+        <insert tableName="purchase_line">
+            <column name="purchase_id" value="8d7a7283-acd6-4e0b-a796-c5c051eaba64"/>
+            <column name="product_id" value="73d8634d-794e-496b-9d17-bc671db00514"/>
+            <column name="purchase_line_price" value="10.0"/>
+            <column name="purchase_line_quantity" value="19"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-03--01-purchase-line-insert-data-2" author="virtadity">
+        <insert tableName="purchase_line">
+            <column name="purchase_id" value="450dfe1a-ca54-4cc8-b88c-d83b552768d0"/>
+            <column name="product_id" value="2b22ef0f-19ef-436a-8571-db7993ccd78c"/>
+            <column name="purchase_line_price" value="13.5"/>
+            <column name="purchase_line_quantity" value="23"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

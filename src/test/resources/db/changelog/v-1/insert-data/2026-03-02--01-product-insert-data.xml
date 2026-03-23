@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-03-02--01-product-insert-data-1" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="73d8634d-794e-496b-9d17-bc671db00514"/>
+            <column name="product_name" value="Golden sort"/>
+            <column name="product_weight" value="100.0"/>
+            <column name="producer_id" value="6d26ba51-2537-470c-8f99-384d20d138e6"/>
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-2" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="2b22ef0f-19ef-436a-8571-db7993ccd78c"/>
+            <column name="product_name" value="GreenLine sort"/>
+            <column name="product_weight" value="113.7"/>
+            <column name="producer_id" value="443572fb-3f81-40e2-9693-f311813f2ca3"/>
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-3" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="5acf035c-d833-4d3f-9fa4-0f66550a962b"/>
+            <column name="product_name" value="YellowLine sort"/>
+            <column name="product_weight" value="121.4"/>
+            <column name="producer_id" value="443572fb-3f81-40e2-9693-f311813f2ca3"/>
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-4" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="1266d5df-7c19-454a-8a7d-c4168bdc1bec"/>
+            <column name="product_name" value="WhiteLine sort"/>
+            <column name="product_weight" value="123.6"/>
+            <column name="producer_id" value="443572fb-3f81-40e2-9693-f311813f2ca3"/>
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-5" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="6254d03c-057d-4159-a6bb-0b16e9782137"/>
+            <column name="product_name" value="BlueLine sort"/>
+            <column name="product_weight" value="122.1"/>
+            <column name="producer_id" value="443572fb-3f81-40e2-9693-f311813f2ca3"/>
+            <column name="product_type_id" value="0b4b01a2-c8c4-4c8d-8f0c-f4832f8cb19e"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-6" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="8805208a-82ce-47d9-a4fd-6746c96b4ca4"/>
+            <column name="product_name" value="BigOrange sort"/>
+            <column name="product_weight" value="193.1"/>
+            <column name="producer_id" value="39c18b89-6143-47cd-9c42-6f3ae53a9529"/>
+            <column name="product_type_id" value="4dda586b-997b-42c3-a56d-7e4b2c8fac43"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-7" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="46d15421-5e83-4318-bd86-d222fbab8708"/>
+            <column name="product_name" value="Orange Oracle sort"/>
+            <column name="product_weight" value="196.1"/>
+            <column name="producer_id" value="39c18b89-6143-47cd-9c42-6f3ae53a9529"/>
+            <column name="product_type_id" value="4dda586b-997b-42c3-a56d-7e4b2c8fac43"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-8" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="cbb6efa1-fbf6-4fe2-a9da-f8749ddf30cd"/>
+            <column name="product_name" value="Orange IBM sort"/>
+            <column name="product_weight" value="193.2"/>
+            <column name="producer_id" value="39c18b89-6143-47cd-9c42-6f3ae53a9529"/>
+            <column name="product_type_id" value="4dda586b-997b-42c3-a56d-7e4b2c8fac43"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="2026-03-02--01-product-insert-data-9" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="a8b9032c-adce-4f4b-985b-85aded616959"/>
+            <column name="product_name" value="StrawBerry Microsoft sort"/>
+            <column name="product_weight" value="69.1"/>
+            <column name="producer_id" value="3546a20d-7c30-46b2-a140-05b55833eb6f"/>
+            <column name="product_type_id" value="8dbedb3a-3ce2-405e-8b96-4da80dbcce2a"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2026-03-02--01-product-insert-data-10" author="virtadity">
+        <insert tableName="product">
+            <column name="product_id" value="3f1ec535-27b6-4d5b-8dbf-b3dbd10d7916"/>
+            <column name="product_name" value="StrawBerry OpenAI sort"/>
+            <column name="product_weight" value="74.9"/>
+            <column name="producer_id" value="3546a20d-7c30-46b2-a140-05b55833eb6f"/>
+            <column name="product_type_id" value="8dbedb3a-3ce2-405e-8b96-4da80dbcce2a"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

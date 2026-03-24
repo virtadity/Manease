@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+/**
+ * General configuration for DAO classes. It used for common application context between tests.
+ */
 @TestConfiguration
 @Import(
         {

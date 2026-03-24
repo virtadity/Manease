@@ -1,7 +1,5 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.ManeaseApplication;
-import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.Producer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

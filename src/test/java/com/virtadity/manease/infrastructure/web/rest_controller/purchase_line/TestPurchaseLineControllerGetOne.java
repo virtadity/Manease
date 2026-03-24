@@ -75,7 +75,7 @@ public class TestPurchaseLineControllerGetOne {
 
         mockMvc.perform(
                 get(
-                        "/purchase_lines/purchase_line?purchase_id={purchaseId}&product_id={productId}",
+                        "/purchase_lines?purchase_id={purchaseId}&product_id={productId}",
                         purchaseId,
                         productId
                 )

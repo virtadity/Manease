@@ -1,6 +1,7 @@
 package com.virtadity.manease.infrastructure.web.rest_controller;
 
-import com.virtadity.manease.application.model.error_response.ErrorResponse;
+import com.virtadity.manease.application.exception.ProductDoesNotExistException;
+import com.virtadity.manease.application.exception.PurchaseDoesNotExistException;
 import com.virtadity.manease.application.service.producer.exception.ProducerNotFoundException;
 import com.virtadity.manease.application.service.product.exception.ProductNotFoundException;
 
@@ -13,6 +14,7 @@ import com.virtadity.manease.infrastructure.database.dao.exception.ProducerEntit
 import com.virtadity.manease.infrastructure.database.dao.exception.ProductEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.dao.exception.ProductTypeEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.dao.exception.PurchaseEntityNotFoundException;
+import com.virtadity.manease.infrastructure.web.dto.error_response.ErrorResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProducerNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProducerNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProducerNotFound(
             ProducerNotFoundException producerNotFoundException,
             HttpServletRequest request
     ) {
@@ -33,7 +35,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProductNotFound(
             ProductNotFoundException productNotFoundException,
             HttpServletRequest request
     ) {
@@ -41,7 +43,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductTypeNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductTypeNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProductTypeNotFound(
             ProductTypeNotFoundException productTypeNotFoundException,
             HttpServletRequest request
     ) {
@@ -49,7 +51,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PurchaseNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePurchaseNotFound(
+    public ResponseEntity<ErrorResponseDTO> handlePurchaseNotFound(
             PurchaseNotFoundException purchaseNotFoundException,
             HttpServletRequest request
     ) {
@@ -57,7 +59,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PurchaseLineNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePurchaseLineNotFound(
+    public ResponseEntity<ErrorResponseDTO> handlePurchaseLineNotFound(
             PurchaseLineNotFoundException purchaseLineNotFoundException,
             HttpServletRequest request
     ) {
@@ -65,7 +67,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProducerIsDifferentException.class)
-    public ResponseEntity<ErrorResponse> handleProducerIsDifferent(
+    public ResponseEntity<ErrorResponseDTO> handleProducerIsDifferent(
             ProducerIsDifferentException producerIsDifferentException,
             HttpServletRequest request
     ) {
@@ -73,7 +75,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductIsAlreadyInPurchaseException.class)
-    public ResponseEntity<ErrorResponse> handleProductIsAlreadyInPurchase(
+    public ResponseEntity<ErrorResponseDTO> handleProductIsAlreadyInPurchase(
             ProductIsAlreadyInPurchaseException productIsAlreadyInPurchaseException,
             HttpServletRequest request
     ) {
@@ -85,7 +87,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProducerEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProducerEntityNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProducerEntityNotFound(
             ProducerEntityNotFoundException producerEntityNotFoundException,
             HttpServletRequest request
     ) {
@@ -97,7 +99,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductEntityNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProductEntityNotFound(
             ProductEntityNotFoundException productEntityNotFoundException,
             HttpServletRequest request
     ) {
@@ -109,7 +111,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductTypeEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductTypeEntityNotFound(
+    public ResponseEntity<ErrorResponseDTO> handleProductTypeEntityNotFound(
             ProductTypeEntityNotFoundException productTypeEntityNotFoundException,
             HttpServletRequest request
     ) {
@@ -121,7 +123,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PurchaseEntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePurchaseEntityNotFound(
+    public ResponseEntity<ErrorResponseDTO> handlePurchaseEntityNotFound(
             PurchaseEntityNotFoundException purchaseEntityNotFoundException,
             HttpServletRequest request
     ) {
@@ -132,14 +134,44 @@ public class GlobalExceptionHandler {
         );
     }
 
-    private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message, HttpServletRequest request) {
-        var error = new ErrorResponse(
+    @ExceptionHandler(PurchaseDoesNotExistException.class)
+    public ResponseEntity<ErrorResponseDTO> handlePurchaseDoesNotExist(
+            PurchaseDoesNotExistException purchaseDoesNotExistException,
+            HttpServletRequest request
+    ) {
+        return buildResponse(
+                HttpStatus.UNPROCESSABLE_CONTENT,
+                purchaseDoesNotExistException.getMessage(),
+                request
+        );
+    }
+
+    @ExceptionHandler(ProductDoesNotExistException.class)
+    public ResponseEntity<ErrorResponseDTO> handleProductDoesNotExist(
+            ProductDoesNotExistException productDoesNotExistException,
+            HttpServletRequest request
+    ) {
+        return buildResponse(
+                HttpStatus.UNPROCESSABLE_CONTENT,
+                productDoesNotExistException.getMessage(),
+                request
+        );
+    }
+
+    private ResponseEntity<ErrorResponseDTO> buildResponse(
+            HttpStatus status,
+            String message,
+            HttpServletRequest request
+    ) {
+
+        var error = new ErrorResponseDTO(
                 status.getReasonPhrase(),
                 message,
                 request.getRequestURI(),
                 status.value(),
                 LocalDateTime.now()
         );
-        return new ResponseEntity<>(error, status);
+
+        return ResponseEntity.status(status).body(error);
     }
 }

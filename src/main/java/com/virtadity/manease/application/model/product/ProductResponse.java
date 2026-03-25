@@ -9,5 +9,4 @@ public record ProductResponse(
         BigDecimal weight,
         UUID producerId,
         UUID productTypeId
-) {
-}
+) {}

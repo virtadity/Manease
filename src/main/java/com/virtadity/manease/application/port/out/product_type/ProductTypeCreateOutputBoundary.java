@@ -4,5 +4,4 @@ import com.virtadity.manease.domain.model.ProductType;
 
 public interface ProductTypeCreateOutputBoundary {
     ProductType create(ProductType productType);
-
 }

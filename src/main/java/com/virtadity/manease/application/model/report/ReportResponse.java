@@ -1,6 +1,6 @@
 package com.virtadity.manease.application.model.report;
 
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

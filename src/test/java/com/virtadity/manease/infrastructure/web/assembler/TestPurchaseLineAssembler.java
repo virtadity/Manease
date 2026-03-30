@@ -1,6 +1,6 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineResponse;
 import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineDTOMapper;
 import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineDTOMapperImpl;
 import org.junit.jupiter.api.AfterEach;

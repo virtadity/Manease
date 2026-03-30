@@ -1,7 +1,7 @@
 package com.virtadity.manease.infrastructure.database.repository;
 
 import com.virtadity.manease.infrastructure.database.entity.PurchaseEntity;
-import com.virtadity.manease.infrastructure.database.read_model.ReportLineReadModel;
+import com.virtadity.manease.infrastructure.database.readmodel.ReportLineReadModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

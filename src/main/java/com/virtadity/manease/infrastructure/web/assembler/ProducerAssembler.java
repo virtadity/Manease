@@ -1,7 +1,7 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
 import com.virtadity.manease.application.model.producer.ProducerResponse;
-import com.virtadity.manease.infrastructure.web.rest_controller.ProducerController;
+import com.virtadity.manease.infrastructure.web.controller.ProducerController;
 import com.virtadity.manease.infrastructure.web.dto.producer.ProducerResponseDTO;
 import com.virtadity.manease.infrastructure.web.mapper.ProducerDTOMapper;
 import lombok.RequiredArgsConstructor;

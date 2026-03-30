@@ -1,0 +1,24 @@
+package com.virtadity.manease.application.service.product.type;
+
+import com.virtadity.manease.application.mapper.ProductTypeMapper;
+import com.virtadity.manease.application.model.product.type.ProductTypeRequest;
+import com.virtadity.manease.application.model.product.type.ProductTypeResponse;
+import com.virtadity.manease.application.port.in.product.type.ProductTypeRegisterInputBoundary;
+import com.virtadity.manease.application.port.out.product.type.ProductTypeCreateOutputBoundary;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class ProductTypeRegisterService implements ProductTypeRegisterInputBoundary {
+
+    private final ProductTypeCreateOutputBoundary productTypeStorageRegister;
+    private final ProductTypeMapper productTypeMapper;
+
+    @Override
+    public ProductTypeResponse execute(ProductTypeRequest productTypeRequest) {
+        var productType = productTypeMapper.toProductType(productTypeRequest);
+        var savedProductType = productTypeStorageRegister.create(productType);
+        return productTypeMapper.toProductTypeResponse(savedProductType);
+    }
+}

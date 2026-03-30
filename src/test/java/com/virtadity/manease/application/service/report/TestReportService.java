@@ -2,9 +2,8 @@ package com.virtadity.manease.application.service.report;
 
 import com.virtadity.manease.application.mapper.ReportMapper;
 import com.virtadity.manease.application.model.report.ReportResponse;
-import com.virtadity.manease.application.port.out.report_line.ReportLineOutputBoundary;
+import com.virtadity.manease.application.port.out.report.line.ReportLineOutputBoundary;
 import com.virtadity.manease.domain.model.Report;
-import com.virtadity.manease.domain.service.report.PrepareReportAction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,9 +1,9 @@
 package com.virtadity.manease.infrastructure.web.dto.report;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.virtadity.manease.infrastructure.web.dto.report.line.ReportLineResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 
 import java.math.BigDecimal;

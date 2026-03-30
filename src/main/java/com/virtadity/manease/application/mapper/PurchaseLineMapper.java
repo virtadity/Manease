@@ -1,7 +1,7 @@
 package com.virtadity.manease.application.mapper;
 
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineRequest;
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineRequest;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineResponse;
 import com.virtadity.manease.domain.model.PurchaseLine;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

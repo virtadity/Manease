@@ -1,8 +1,8 @@
 package com.virtadity.manease.application.mapper;
 
 
-import com.virtadity.manease.application.model.product_type.ProductTypeRequest;
-import com.virtadity.manease.application.model.product_type.ProductTypeResponse;
+import com.virtadity.manease.application.model.product.type.ProductTypeRequest;
+import com.virtadity.manease.application.model.product.type.ProductTypeResponse;
 import com.virtadity.manease.domain.model.ProductType;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
 import com.virtadity.manease.infrastructure.web.mapper.ReportLineDTOMapper;
 import com.virtadity.manease.infrastructure.web.mapper.ReportLineDTOMapperImpl;
 import org.junit.jupiter.api.AfterEach;

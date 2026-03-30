@@ -1,7 +1,7 @@
 package com.virtadity.manease.infrastructure.web.mapper;
 
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
-import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
+import com.virtadity.manease.infrastructure.web.dto.report.line.ReportLineResponseDTO;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -1,8 +1,8 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
 import com.virtadity.manease.application.model.report.ReportResponse;
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
-import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
+import com.virtadity.manease.infrastructure.web.dto.report.line.ReportLineResponseDTO;
 import com.virtadity.manease.infrastructure.web.dto.report.ReportResponseDTO;
 import com.virtadity.manease.infrastructure.web.mapper.ReportDTOMapper;
 import com.virtadity.manease.infrastructure.web.mapper.ReportLineDTOMapper;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;

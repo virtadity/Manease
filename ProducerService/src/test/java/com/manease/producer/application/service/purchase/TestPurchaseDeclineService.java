@@ -81,7 +81,7 @@ public class TestPurchaseDeclineService {
         var id = UUID.randomUUID();
         var producerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.empty());
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.empty());
         Assertions.assertThrows(
                 PurchaseDoesNotExistException.class,
                 () -> purchaseDeclineService.execute(id, producerId)
@@ -95,7 +95,7 @@ public class TestPurchaseDeclineService {
         var purchase = new Purchase(id, producerId, createdStatusId);
 
         var otherProducerId = UUID.randomUUID();
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 ProducerCannotDeclinePurchaseException.class,
                 () -> purchaseDeclineService.execute(id, otherProducerId)
@@ -109,7 +109,7 @@ public class TestPurchaseDeclineService {
         var purchaseStatusId = UUID.randomUUID();
         var purchase = new Purchase(id, producerId, purchaseStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 PurchaseCannotBeDeclinedException.class,
                 () -> purchaseDeclineService.execute(id, producerId)
@@ -125,8 +125,8 @@ public class TestPurchaseDeclineService {
         var declinedPurchase = new Purchase(id, producerId, declinedStatusId);
         var purchaseResponse = new PurchaseResponse(id, producerId, declinedStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
-        when(purchaseSetStatus.execute(id, declinedStatusId)).thenReturn(declinedPurchase);
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
+        when(purchaseSetStatus.setStatus(id, declinedStatusId)).thenReturn(declinedPurchase);
         when(purchaseMapper.toPurchaseResponse(declinedPurchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseDeclineService.execute(id, producerId);
@@ -142,8 +142,8 @@ public class TestPurchaseDeclineService {
         var declinedPurchase = new Purchase(id, producerId, declinedStatusId);
         var purchaseResponse = new PurchaseResponse(id, producerId, declinedStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
-        when(purchaseSetStatus.execute(id, declinedStatusId)).thenReturn(declinedPurchase);
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
+        when(purchaseSetStatus.setStatus(id, declinedStatusId)).thenReturn(declinedPurchase);
         when(purchaseMapper.toPurchaseResponse(declinedPurchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseDeclineService.execute(id, producerId);

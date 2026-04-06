@@ -22,7 +22,7 @@ public class PurchaseGetAllCreatedService implements PurchaseGetAllCreatedInputB
     @Override
     public List<PurchaseResponse> execute(UUID producerId) {
         return purchaseMapper.toPurchaseResponseList(
-                purchaseGetAllWithStatus.execute(producerId, purchaseStatusApproved.id())
+                purchaseGetAllWithStatus.getAllWith(producerId, purchaseStatusApproved.id())
         );
     }
 }

@@ -25,10 +25,10 @@ public class PurchaseCreateService implements PurchaseCreateInputBoundary {
     public PurchaseResponse execute(PurchaseRequest purchaseRequest) {
         var purchase = purchaseMapper.toPurchase(purchaseRequest, purchaseStatusCreated.id());
         var purchaseId = purchaseRequest.id();
-        purchaseGetOne.execute(purchaseId).ifPresent(
+        purchaseGetOne.getOne(purchaseId).ifPresent(
                 (actualPurchase) -> { throw PurchaseAlreadyExistException.withId(purchaseId); }
         );
-        var purchaseCreated = purchaseCreate.execute(purchase);
+        var purchaseCreated = purchaseCreate.create(purchase);
         return purchaseMapper.toPurchaseResponse(purchaseCreated);
     }
 

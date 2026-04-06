@@ -5,5 +5,5 @@ import com.manease.producer.domain.entity.purchase.Purchase;
 import java.util.UUID;
 
 public interface PurchaseSetStatusOutputBoundary {
-    Purchase execute(UUID purchaseId, UUID purchaseStatusId);
+    Purchase setStatus(UUID purchaseId, UUID purchaseStatusId);
 }

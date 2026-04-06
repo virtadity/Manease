@@ -23,7 +23,7 @@ public class PurchaseGetAllDeclinedService implements PurchaseGetAllDeclinedInpu
     @Override
     public List<PurchaseResponse> execute(UUID producerId) {
         return purchaseMapper.toPurchaseResponseList(
-                purchaseGetAllWithStatus.execute(producerId, purchaseStatusDeclined.id())
+                purchaseGetAllWithStatus.getAllWith(producerId, purchaseStatusDeclined.id())
         );
     }
 }

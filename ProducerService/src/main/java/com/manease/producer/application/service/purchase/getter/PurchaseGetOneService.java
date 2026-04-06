@@ -20,7 +20,7 @@ public class PurchaseGetOneService  implements PurchaseGetOneInputBoundary {
 
     @Override
     public PurchaseResponse execute(UUID id, UUID producerId) {
-        var purchase = purchaseGetOne.execute(id).orElseThrow(() -> PurchaseDoesNotExistException.withId(id));
+        var purchase = purchaseGetOne.getOne(id).orElseThrow(() -> PurchaseDoesNotExistException.withId(id));
 
         if (!purchase.producerId().equals(producerId)) {
             throw ProducerCannotGetPurchaseException.withIds(producerId, id);

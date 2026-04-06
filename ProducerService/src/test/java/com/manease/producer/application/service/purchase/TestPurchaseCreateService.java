@@ -66,8 +66,8 @@ public class TestPurchaseCreateService {
         var purchaseResponse = new PurchaseResponse(id, producerId, purchaseStatusId);
 
         when(purchaseMapper.toPurchase(any(), any())).thenReturn(purchase);
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.empty());
-        when(purchaseCreate.execute(purchase)).thenReturn(purchase);
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.empty());
+        when(purchaseCreate.create(purchase)).thenReturn(purchase);
         when(purchaseMapper.toPurchaseResponse(purchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseCreateService.execute(purchaseRequest);
@@ -83,7 +83,7 @@ public class TestPurchaseCreateService {
         var purchase = new Purchase(id, producerId, purchaseStatusId);
 
         when(purchaseMapper.toPurchase(any(), any())).thenReturn(purchase);
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.of(purchase));
 
         Assertions.assertThrows(
                 PurchaseAlreadyExistException.class,

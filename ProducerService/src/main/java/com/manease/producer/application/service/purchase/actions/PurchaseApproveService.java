@@ -27,7 +27,7 @@ public class PurchaseApproveService implements PurchaseApproveInputBoundary {
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .execute(purchaseId)
+                .getOne(purchaseId)
                 .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
 
         if (!purchase.producerId().equals(producerId)) {
@@ -38,7 +38,7 @@ public class PurchaseApproveService implements PurchaseApproveInputBoundary {
             throw PurchaseCannotBeApprovedException.withId(purchaseId);
         }
 
-        var approvedPurchase = purchaseSetStatus.execute(purchaseId, purchaseStatusApproved.id());
+        var approvedPurchase = purchaseSetStatus.setStatus(purchaseId, purchaseStatusApproved.id());
         return purchaseMapper.toPurchaseResponse(approvedPurchase);
     }
 

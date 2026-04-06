@@ -20,7 +20,7 @@ public class PurchaseStatusGetOneService implements PurchaseStatusGetOneInputBou
     @Override
     public PurchaseStatusResponse execute(UUID id) {
         var purchaseStatus = purchaseStatusGetOne
-                .execute(id)
+                .getOne(id)
                 .orElseThrow(() -> PurchaseStatusNotFoundException.withId(id));
         return purchaseStatusMapper.toPurchaseStatusResponse(purchaseStatus);
     }

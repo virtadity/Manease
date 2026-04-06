@@ -64,7 +64,7 @@ public class TestPurchaseDeliveredService {
         var id = UUID.randomUUID();
         var producerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.empty());
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.empty());
         Assertions.assertThrows(
                 PurchaseDoesNotExistException.class,
                 () -> purchaseDeliverService.execute(id, producerId)
@@ -78,7 +78,7 @@ public class TestPurchaseDeliveredService {
         var purchase = new Purchase(id, producerId, approvedStatusId);
         var otherProducerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 ProducerCannotDeliverPurchaseException.class,
                 () -> purchaseDeliverService.execute(id, otherProducerId)
@@ -92,7 +92,7 @@ public class TestPurchaseDeliveredService {
         var purchaseStatusId = UUID.randomUUID();
         var purchase = new Purchase(id, producerId, purchaseStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 PurchaseCannotBeDeliveredException.class,
                 () -> purchaseDeliverService.execute(id, producerId)
@@ -107,8 +107,8 @@ public class TestPurchaseDeliveredService {
         var deliveredPurchase = new Purchase(id, producerId, deliveredStatusId);
         var purchaseResponse = new PurchaseResponse(id, producerId, deliveredStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
-        when(purchaseSetStatus.execute(id, deliveredStatusId)).thenReturn(deliveredPurchase);
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
+        when(purchaseSetStatus.setStatus(id, deliveredStatusId)).thenReturn(deliveredPurchase);
         when(purchaseMapper.toPurchaseResponse(deliveredPurchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseDeliverService.execute(id, producerId);

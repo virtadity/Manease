@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PurchaseGetAllOutputBoundary {
-    List<Purchase> execute(UUID producerId);
+    List<Purchase> getAllWith(UUID producerId);
 }

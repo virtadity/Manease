@@ -71,7 +71,7 @@ public class TestPurchaseApproveService {
         var id = UUID.randomUUID();
         var producerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.empty());
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.empty());
         Assertions.assertThrows(
                 PurchaseDoesNotExistException.class,
                 () -> purchaseApproveService.execute(id, producerId)
@@ -86,7 +86,7 @@ public class TestPurchaseApproveService {
 
         var otherProducerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 ProducerCannotApprovePurchaseException.class,
                 () -> purchaseApproveService.execute(id, otherProducerId)
@@ -100,7 +100,7 @@ public class TestPurchaseApproveService {
         var purchaseStatusId = UUID.randomUUID();
         var purchase = new Purchase(id, producerId, purchaseStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 PurchaseCannotBeApprovedException.class,
                 () -> purchaseApproveService.execute(id, producerId)
@@ -116,8 +116,8 @@ public class TestPurchaseApproveService {
         var approvedPurchase = new Purchase(id, producerId, approvedStatusId);
         var purchaseResponse = new PurchaseResponse(id, producerId, approvedStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
-        when(purchaseSetStatus.execute(id, approvedStatusId)).thenReturn(approvedPurchase);
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
+        when(purchaseSetStatus.setStatus(id, approvedStatusId)).thenReturn(approvedPurchase);
         when(purchaseMapper.toPurchaseResponse(approvedPurchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseApproveService.execute(id, producerId);

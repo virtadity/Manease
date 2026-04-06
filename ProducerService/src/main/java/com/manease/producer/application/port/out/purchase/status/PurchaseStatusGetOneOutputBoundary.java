@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PurchaseStatusGetOneOutputBoundary {
-    Optional<PurchaseStatus> execute(UUID id);
+    Optional<PurchaseStatus> getOne(UUID id);
 }

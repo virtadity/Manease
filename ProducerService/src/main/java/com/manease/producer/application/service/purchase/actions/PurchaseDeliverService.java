@@ -27,7 +27,7 @@ public class PurchaseDeliverService implements PurchaseDeliverInputBoundary {
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .execute(purchaseId)
+                .getOne(purchaseId)
                 .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
 
         if (!purchase.producerId().equals(producerId)) {
@@ -38,7 +38,7 @@ public class PurchaseDeliverService implements PurchaseDeliverInputBoundary {
             throw PurchaseCannotBeDeliveredException.withId(purchaseId);
         }
 
-        var purchaseDelivered = purchaseSetStatus.execute(purchaseId, purchaseStatusDelivered.id());
+        var purchaseDelivered = purchaseSetStatus.setStatus(purchaseId, purchaseStatusDelivered.id());
         return purchaseMapper.toPurchaseResponse(purchaseDelivered);
     }
 }

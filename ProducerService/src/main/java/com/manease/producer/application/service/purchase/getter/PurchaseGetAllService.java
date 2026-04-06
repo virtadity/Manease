@@ -19,6 +19,6 @@ public class PurchaseGetAllService implements PurchaseGetAllInputBoundary {
 
     @Override
     public List<PurchaseResponse> execute(UUID producerId) {
-        return purchaseMapper.toPurchaseResponseList(purchaseGetAll.execute(producerId));
+        return purchaseMapper.toPurchaseResponseList(purchaseGetAll.getAllWith(producerId));
     }
 }

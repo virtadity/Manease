@@ -26,14 +26,14 @@ public class PurchaseDeleteService implements PurchaseDeleteInputBoundary {
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .execute(purchaseId)
+                .getOne(purchaseId)
                 .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
 
         if (!purchase.producerId().equals(producerId)) {
             throw ProducerCannotDeclinePurchaseException.withIds(producerId, purchaseId);
         }
 
-        var purchaseDeleted = purchaseSetStatus.execute(purchaseId, purchaseStatusDelete.id());
+        var purchaseDeleted = purchaseSetStatus.setStatus(purchaseId, purchaseStatusDelete.id());
         return purchaseMapper.toPurchaseResponse(purchaseDeleted);
     }
 

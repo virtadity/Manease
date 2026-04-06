@@ -5,5 +5,5 @@ import com.manease.producer.domain.entity.purchase.PurchaseStatus;
 import java.util.List;
 
 public interface PurchaseStatusGetAllOutputBoundary {
-    List<PurchaseStatus> execute();
+    List<PurchaseStatus> getAll();
 }

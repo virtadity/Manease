@@ -22,7 +22,7 @@ public class PurchaseGetAllDeliveredService implements PurchaseGetAllDeliveredIn
     @Override
     public List<PurchaseResponse> execute(UUID producerId) {
         return purchaseMapper.toPurchaseResponseList(
-                purchaseGetAllWithStatus.execute(producerId, purchaseStatusDelivered.id())
+                purchaseGetAllWithStatus.getAllWith(producerId, purchaseStatusDelivered.id())
         );
     }
 }

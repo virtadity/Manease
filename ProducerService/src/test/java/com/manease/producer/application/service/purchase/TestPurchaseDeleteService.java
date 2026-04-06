@@ -61,7 +61,7 @@ public class TestPurchaseDeleteService {
         var id = UUID.randomUUID();
         var producerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(any())).thenReturn(Optional.empty());
+        when(purchaseGetOne.getOne(any())).thenReturn(Optional.empty());
         Assertions.assertThrows(
                 PurchaseDoesNotExistException.class,
                 () -> purchaseDeleteService.execute(id, producerId)
@@ -77,7 +77,7 @@ public class TestPurchaseDeleteService {
 
         var otherProducerId = UUID.randomUUID();
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
         Assertions.assertThrows(
                 ProducerCannotDeclinePurchaseException.class,
                 () -> purchaseDeleteService.execute(id, otherProducerId)
@@ -93,8 +93,8 @@ public class TestPurchaseDeleteService {
         var deletedPurchase = new Purchase(id, producerId, deletedStatusId);
         var purchaseResponse = new PurchaseResponse(id, producerId, deletedStatusId);
 
-        when(purchaseGetOne.execute(id)).thenReturn(Optional.of(purchase));
-        when(purchaseSetStatus.execute(id, deletedStatusId)).thenReturn(deletedPurchase);
+        when(purchaseGetOne.getOne(id)).thenReturn(Optional.of(purchase));
+        when(purchaseSetStatus.setStatus(id, deletedStatusId)).thenReturn(deletedPurchase);
         when(purchaseMapper.toPurchaseResponse(deletedPurchase)).thenReturn(purchaseResponse);
 
         var actualPurchaseResponse = purchaseDeleteService.execute(id, producerId);

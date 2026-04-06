@@ -18,7 +18,7 @@ public class PurchaseStatusFetcherImpl implements PurchaseStatusFetcher {
     @Transactional
     public PurchaseStatus fetchOrCreatePurchaseStatus(PurchaseStatus purchaseStatus) {
         return getStatusByName
-                .execute(purchaseStatus.name())
+                .getByName(purchaseStatus.name())
                 .orElseGet(() -> createPurchaseStatus.create(purchaseStatus));
     }
 }

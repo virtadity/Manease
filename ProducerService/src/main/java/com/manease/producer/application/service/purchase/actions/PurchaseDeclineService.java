@@ -28,7 +28,7 @@ public class PurchaseDeclineService implements PurchaseDeclineInputBoundary {
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .execute(purchaseId)
+                .getOne(purchaseId)
                 .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
 
         if (!purchase.producerId().equals(producerId)) {
@@ -40,7 +40,7 @@ public class PurchaseDeclineService implements PurchaseDeclineInputBoundary {
             throw PurchaseCannotBeDeclinedException.withId(purchaseId);
         }
 
-        var declinedPurchase = purchaseSetStatus.execute(purchaseId, purchaseStatusDeclined.id());
+        var declinedPurchase = purchaseSetStatus.setStatus(purchaseId, purchaseStatusDeclined.id());
         return purchaseMapper.toPurchaseResponse(declinedPurchase);
     }
 }

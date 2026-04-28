@@ -1,46 +1,46 @@
 package com.manease.producer.application.service.purchase.actions;
 
-import com.manease.producer.application.entity.purchase.PurchaseResponse;
-import com.manease.producer.application.mapper.purchase.PurchaseMapper;
+import com.manease.producer.application.entity.response.PurchaseResponse;
+import com.manease.producer.application.mapper.PurchaseMapper;
 import com.manease.producer.application.port.in.purchase.actions.PurchaseDeclineInputBoundary;
+import com.manease.producer.application.port.out.purchase.actions.PurchaseSetStatusOutputBoundary;
 import com.manease.producer.application.port.out.purchase.getters.PurchaseGetOneOutputBoundary;
-import com.manease.producer.application.port.out.purchase.PurchaseSetStatusOutputBoundary;
-import com.manease.producer.application.service.purchase.exception.ProducerCannotDeclinePurchaseException;
-import com.manease.producer.application.service.purchase.exception.PurchaseCannotBeDeclinedException;
-import com.manease.producer.application.service.purchase.exception.PurchaseDoesNotExistException;
-import com.manease.producer.domain.entity.purchase.PurchaseStatus;
+import com.manease.producer.application.service.purchase.exception.PurchaseNotFoundException;
+import com.manease.producer.application.service.purchase.status.handler.ApprovedPurchaseStatusHandler;
+import com.manease.producer.application.service.purchase.status.handler.CreatedPurchaseStatusHandler;
+import com.manease.producer.application.service.purchase.status.handler.DeclinedPurchaseStatusHandler;
+import com.manease.producer.domain.service.DeclineChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class PurchaseDeclineService implements PurchaseDeclineInputBoundary {
 
-    private final PurchaseStatus purchaseStatusApproved;
-    private final PurchaseStatus purchaseStatusCreated;
-    private final PurchaseStatus purchaseStatusDeclined;
-    private final PurchaseGetOneOutputBoundary purchaseGetOne;
+    private final DeclineChecker purchaseDeclineChecker = new DeclineChecker();
+    private final CreatedPurchaseStatusHandler createdPurchaseStatusHandler;
+    private final ApprovedPurchaseStatusHandler approvedPurchaseStatusHandler;
     private final PurchaseSetStatusOutputBoundary purchaseSetStatus;
+    private final DeclinedPurchaseStatusHandler purchaseStatusHandler;
+    private final PurchaseGetOneOutputBoundary purchaseGetOne;
     private final PurchaseMapper purchaseMapper;
 
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .getOne(purchaseId)
-                .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
+                .getOneById(purchaseId)
+                .orElseThrow(() -> PurchaseNotFoundException.withId(purchaseId));
 
-        if (!purchase.producerId().equals(producerId)) {
-            throw ProducerCannotDeclinePurchaseException.withIds(producerId, purchaseId);
-        }
+        var permittedStatuses = Set.of(
+                approvedPurchaseStatusHandler.get().id(),
+                createdPurchaseStatusHandler.get().id()
+        );
 
-        if (!(purchase.purchaseStatusId() == purchaseStatusCreated.id()
-                || purchase.purchaseStatusId() == purchaseStatusApproved.id())) {
-            throw PurchaseCannotBeDeclinedException.withId(purchaseId);
-        }
-
-        var declinedPurchase = purchaseSetStatus.setStatus(purchaseId, purchaseStatusDeclined.id());
+        purchaseDeclineChecker.check(purchase, producerId, permittedStatuses);
+        var declinedPurchase = purchaseSetStatus.setStatusToPurchase(purchaseId, purchaseStatusHandler.get().id());
         return purchaseMapper.toPurchaseResponse(declinedPurchase);
     }
 }

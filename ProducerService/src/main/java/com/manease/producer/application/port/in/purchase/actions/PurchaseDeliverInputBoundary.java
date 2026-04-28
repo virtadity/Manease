@@ -1,6 +1,6 @@
 package com.manease.producer.application.port.in.purchase.actions;
 
-import com.manease.producer.application.entity.purchase.PurchaseResponse;
+import com.manease.producer.application.entity.response.PurchaseResponse;
 
 import java.util.UUID;
 

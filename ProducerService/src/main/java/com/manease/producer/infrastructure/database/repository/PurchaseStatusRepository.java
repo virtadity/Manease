@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 import java.util.UUID;
 
-
 public interface PurchaseStatusRepository extends JpaRepository<PurchaseStatusEntity, UUID> {
-    @Query(value = "SELECT * FROM PURCHASE_STATUS WHERE PURCHASE_STATUS_NAME = :name", nativeQuery = true)
-    Optional<PurchaseStatusEntity> findByName(@Param("name") String purchaseStatusName);
+    @Query(value = """
+            SELECT * FROM PURCHASE_STATUS WHERE purchase_status_name = :name
+            LIMIT 1
+            """, nativeQuery = true)
+    Optional<PurchaseStatusEntity> findByName(@Param("name") String name);
 }

@@ -1,10 +1,10 @@
 package com.manease.producer.infrastructure.database.dao;
 
-import com.manease.producer.application.port.out.purchase.status.PurchaseStatusCreateOutputBoundary;
-import com.manease.producer.application.port.out.purchase.status.PurchaseStatusGetAllOutputBoundary;
-import com.manease.producer.application.port.out.purchase.status.PurchaseStatusGetByNameOutputBoundary;
-import com.manease.producer.application.port.out.purchase.status.PurchaseStatusGetOneOutputBoundary;
-import com.manease.producer.domain.entity.purchase.PurchaseStatus;
+import com.manease.producer.application.port.out.purchase.status.actions.PurchaseStatusCreateOutputBoundary;
+import com.manease.producer.application.port.out.purchase.status.getters.PurchaseStatusGetAllOutputBoundary;
+import com.manease.producer.application.port.out.purchase.status.getters.PurchaseStatusGetByNameOutputBoundary;
+import com.manease.producer.application.port.out.purchase.status.getters.PurchaseStatusGetOneOutputBoundary;
+import com.manease.producer.domain.entity.PurchaseStatus;
 import com.manease.producer.infrastructure.database.mapper.PurchaseStatusEntityMapper;
 import com.manease.producer.infrastructure.database.repository.PurchaseStatusRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,41 +14,43 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @Repository
 @RequiredArgsConstructor
 public class PurchaseStatusDAO implements
         PurchaseStatusCreateOutputBoundary,
-        PurchaseStatusGetOneOutputBoundary,
         PurchaseStatusGetAllOutputBoundary,
-        PurchaseStatusGetByNameOutputBoundary {
+        PurchaseStatusGetOneOutputBoundary,
+        PurchaseStatusGetByNameOutputBoundary
+{
 
-    private final PurchaseStatusEntityMapper purchaseStatusEntityMapper;
     private final PurchaseStatusRepository purchaseStatusRepository;
+    private final PurchaseStatusEntityMapper purchaseStatusEntityMapper;
 
     @Override
-    public PurchaseStatus create(PurchaseStatus purchaseStatus) {
+    public PurchaseStatus createPurchaseStatus(PurchaseStatus purchaseStatus) {
         var purchaseStatusEntity = purchaseStatusEntityMapper.toPurchaseStatusEntity(purchaseStatus);
         var createdPurchaseStatusEntity = purchaseStatusRepository.save(purchaseStatusEntity);
         return purchaseStatusEntityMapper.toPurchaseStatus(createdPurchaseStatusEntity);
     }
 
     @Override
-    public Optional<PurchaseStatus> getOne(UUID id) {
-        var purchaseStatusEntity = purchaseStatusRepository.findById(id);
-        return purchaseStatusEntity.map(purchaseStatusEntityMapper::toPurchaseStatus);
-    }
-
-    @Override
     public List<PurchaseStatus> getAll() {
-        var purchaseStatusEntityList = purchaseStatusRepository.findAll();
-        return purchaseStatusEntityMapper.toPurchaseStatusList(purchaseStatusEntityList);
+        return purchaseStatusRepository
+                .findAll()
+                .stream()
+                .map(purchaseStatusEntityMapper::toPurchaseStatus)
+                .toList();
     }
 
     @Override
-    public Optional<PurchaseStatus> getByName(String name) {
-        var purchaseStatusEntity = purchaseStatusRepository.findByName(name);
-        return purchaseStatusEntity.map(purchaseStatusEntityMapper::toPurchaseStatus);
+    public Optional<PurchaseStatus> getOneById(UUID id) {
+        return purchaseStatusRepository
+                .findById(id)
+                .map(purchaseStatusEntityMapper::toPurchaseStatus);
     }
 
+    @Override
+    public Optional<PurchaseStatus> getOneByName(String name) {
+        return purchaseStatusRepository.findByName(name).map(purchaseStatusEntityMapper::toPurchaseStatus);
+    }
 }

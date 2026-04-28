@@ -1,15 +1,17 @@
 package com.manease.producer.infrastructure.database.mapper;
 
-import com.manease.producer.domain.entity.purchase.Purchase;
+import com.manease.producer.domain.entity.Purchase;
 import com.manease.producer.infrastructure.database.entity.PurchaseEntity;
+import com.manease.producer.infrastructure.database.entity.PurchaseStatusEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-
-import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PurchaseEntityMapper {
-    PurchaseEntity toPurchaseEntity(Purchase purchase);
+    @Mapping(target = "id", expression = "java(purchase.id())")
+    PurchaseEntity toPurchaseEntity(Purchase purchase, PurchaseStatusEntity purchaseStatus);
+
+    @Mapping(target = "statusId", expression = "java(purchaseEntity.getPurchaseStatus().getId())")
     Purchase toPurchase(PurchaseEntity purchaseEntity);
-    List<Purchase> toPurchaseList(List<PurchaseEntity> purchaseEntityList);
 }

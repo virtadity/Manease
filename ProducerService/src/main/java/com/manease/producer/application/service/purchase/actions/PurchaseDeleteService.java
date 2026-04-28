@@ -1,40 +1,34 @@
 package com.manease.producer.application.service.purchase.actions;
 
-import com.manease.producer.application.entity.purchase.PurchaseResponse;
-import com.manease.producer.application.mapper.purchase.PurchaseMapper;
+import com.manease.producer.application.entity.response.PurchaseResponse;
+import com.manease.producer.application.mapper.PurchaseMapper;
 import com.manease.producer.application.port.in.purchase.actions.PurchaseDeleteInputBoundary;
+import com.manease.producer.application.port.out.purchase.actions.PurchaseSetStatusOutputBoundary;
 import com.manease.producer.application.port.out.purchase.getters.PurchaseGetOneOutputBoundary;
-import com.manease.producer.application.port.out.purchase.PurchaseSetStatusOutputBoundary;
-import com.manease.producer.application.service.purchase.exception.ProducerCannotDeclinePurchaseException;
-import com.manease.producer.application.service.purchase.exception.PurchaseDoesNotExistException;
-import com.manease.producer.domain.entity.purchase.PurchaseStatus;
+import com.manease.producer.application.service.purchase.exception.PurchaseNotFoundException;
+import com.manease.producer.application.service.purchase.status.handler.DeletedPurchaseStatusHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-
 @Service
 @RequiredArgsConstructor
 public class PurchaseDeleteService implements PurchaseDeleteInputBoundary {
 
-    private final PurchaseStatus purchaseStatusDelete;
+    private final PurchaseMapper purchaseMapper;
     private final PurchaseGetOneOutputBoundary purchaseGetOne;
     private final PurchaseSetStatusOutputBoundary purchaseSetStatus;
-    private final PurchaseMapper purchaseMapper;
+    private final DeletedPurchaseStatusHandler deletedPurchaseStatusHandler;
 
     @Override
     public PurchaseResponse execute(UUID purchaseId, UUID producerId) {
         var purchase = purchaseGetOne
-                .getOne(purchaseId)
-                .orElseThrow(() -> PurchaseDoesNotExistException.withId(purchaseId));
+                .getOneById(purchaseId)
+                .orElseThrow(() -> PurchaseNotFoundException.withId(purchaseId));
 
-        if (!purchase.producerId().equals(producerId)) {
-            throw ProducerCannotDeclinePurchaseException.withIds(producerId, purchaseId);
-        }
-
-        var purchaseDeleted = purchaseSetStatus.setStatus(purchaseId, purchaseStatusDelete.id());
-        return purchaseMapper.toPurchaseResponse(purchaseDeleted);
+        var deletedStatusId = deletedPurchaseStatusHandler.get().id();
+        var deletedPurchase = purchaseSetStatus.setStatusToPurchase(purchaseId, deletedStatusId);
+        return purchaseMapper.toPurchaseResponse(deletedPurchase);
     }
-
 }

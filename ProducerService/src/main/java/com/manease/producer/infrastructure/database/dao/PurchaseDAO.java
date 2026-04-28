@@ -1,18 +1,15 @@
 package com.manease.producer.infrastructure.database.dao;
 
-import com.manease.producer.application.port.out.purchase.PurchaseCreateOutputBoundary;
-import com.manease.producer.application.port.out.purchase.PurchaseSetStatusOutputBoundary;
+import com.manease.producer.application.port.out.purchase.actions.PurchaseCreateOutputBoundary;
+import com.manease.producer.application.port.out.purchase.actions.PurchaseSetStatusOutputBoundary;
 import com.manease.producer.application.port.out.purchase.getters.PurchaseGetAllOutputBoundary;
-import com.manease.producer.application.port.out.purchase.getters.PurchaseGetAllWithStatusOutputBoundary;
 import com.manease.producer.application.port.out.purchase.getters.PurchaseGetOneOutputBoundary;
-import com.manease.producer.domain.entity.purchase.Purchase;
-import com.manease.producer.infrastructure.database.dao.exception.PurchaseEntityNotFoundException;
-import com.manease.producer.infrastructure.database.dao.exception.PurchaseStatusEntityNotFoundException;
-import com.manease.producer.infrastructure.database.entity.PurchaseEntity;
+import com.manease.producer.domain.entity.Purchase;
+import com.manease.producer.infrastructure.database.dao.exception.PurchaseNotFoundException;
+import com.manease.producer.infrastructure.database.dao.exception.PurchaseStatusNotFoundException;
 import com.manease.producer.infrastructure.database.mapper.PurchaseEntityMapper;
 import com.manease.producer.infrastructure.database.repository.PurchaseRepository;
 import com.manease.producer.infrastructure.database.repository.PurchaseStatusRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,60 +22,53 @@ import java.util.UUID;
 public class PurchaseDAO implements
         PurchaseCreateOutputBoundary,
         PurchaseSetStatusOutputBoundary,
-        PurchaseGetOneOutputBoundary,
         PurchaseGetAllOutputBoundary,
-        PurchaseGetAllWithStatusOutputBoundary {
+        PurchaseGetOneOutputBoundary
+{
 
-    private final PurchaseEntityMapper purchaseEntityMapper;
     private final PurchaseRepository purchaseRepository;
     private final PurchaseStatusRepository purchaseStatusRepository;
+    private final PurchaseEntityMapper purchaseEntityMapper;
 
     @Override
-    public Purchase create(Purchase purchase) {
-        var purchaseEntity = purchaseEntityMapper.toPurchaseEntity(purchase);
+    public Purchase createPurchase(Purchase purchase) {
+        var statusId = purchase.statusId();
+        var purchaseStatusEntity = purchaseStatusRepository
+                .findById(statusId)
+                .orElseThrow(() -> PurchaseStatusNotFoundException.withId(statusId));
+
+        var purchaseEntity = purchaseEntityMapper.toPurchaseEntity(purchase, purchaseStatusEntity);
         var createdPurchaseEntity = purchaseRepository.save(purchaseEntity);
         return purchaseEntityMapper.toPurchase(createdPurchaseEntity);
     }
 
-    // The follow method has been divided for the reduction the time used for the transaction.
-    // It's not as noticeable as in larger projects.
     @Override
-    public Purchase setStatus(UUID purchaseId, UUID purchaseStatusId) {
-        var updatedPurchase = this.updateStatus(purchaseId, purchaseStatusId);
-        return purchaseEntityMapper.toPurchase(updatedPurchase);
-    }
+    public Purchase setStatusToPurchase(UUID purchaseId, UUID purchaseStatusId) {
+        var purchaseEntity = purchaseRepository
+                .findById(purchaseStatusId)
+                .orElseThrow(() -> PurchaseNotFoundException.withId(purchaseId));
 
-    @Transactional
-    private PurchaseEntity updateStatus(UUID purchaseId, UUID purchaseStatusId) {
-        var purchaseEntity = purchaseRepository.findById(purchaseId).orElseThrow(
-                () -> PurchaseEntityNotFoundException.withId(purchaseId)
-        );
+        var purchaseStatusEntity = purchaseStatusRepository
+                .findById(purchaseStatusId)
+                .orElseThrow(() -> PurchaseStatusNotFoundException.withId(purchaseStatusId));
 
-        var purchaseStatusEntity = purchaseStatusRepository.findById(purchaseStatusId).orElseThrow(
-                () -> PurchaseStatusEntityNotFoundException.withId(purchaseStatusId)
-        );
-
-        purchaseEntity.setPurchaseStatusEntity(purchaseStatusEntity);
-        return purchaseRepository.save(purchaseEntity);
+        purchaseEntity.setPurchaseStatus(purchaseStatusEntity);
+        var updatedPurchaseEntity = purchaseRepository.save(purchaseEntity);
+        return purchaseEntityMapper.toPurchase(updatedPurchaseEntity);
     }
 
     @Override
-    public Optional<Purchase> getOne(UUID id) {
+    public Optional<Purchase> getOneById(UUID id) {
         var purchaseEntity = purchaseRepository.findById(id);
         return purchaseEntity.map(purchaseEntityMapper::toPurchase);
     }
 
     @Override
-    @Transactional
-    public List<Purchase> getAllWith(UUID producerId) {
-        var purchaseEntityList = purchaseRepository.findAllWithProducer(producerId);
-        return purchaseEntityMapper.toPurchaseList(purchaseEntityList);
-    }
-
-    @Override
-    @Transactional
-    public List<Purchase> getAllWith(UUID producerId, UUID purchaseStatusId) {
-        var purchaseEntityList = purchaseRepository.findAllWithProducerAndStatus(producerId, purchaseStatusId);
-        return purchaseEntityMapper.toPurchaseList(purchaseEntityList);
+    public List<Purchase> getAll(UUID producerId) {
+        return purchaseRepository
+                .getAllWithProducer(producerId)
+                .stream()
+                .map(purchaseEntityMapper::toPurchase)
+                .toList();
     }
 }

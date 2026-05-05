@@ -1,9 +1,7 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.ReportLine;
 import com.virtadity.manease.infrastructure.database.entity.PurchaseLineEntity;
-import com.virtadity.manease.infrastructure.database.repository.ProductRepository;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseLineRepository;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseRepository;
 import org.junit.jupiter.api.Test;
@@ -19,10 +17,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Import(PersistenceTestSetting.class)
-@ActiveProfiles("test")
 @DataJpaTest
+@ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(PersistenceTestSetting.class)
 public class TestReportLineDAO {
 
     @Autowired
@@ -33,9 +31,6 @@ public class TestReportLineDAO {
 
     @Autowired
     private PurchaseRepository purchaseRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     @Test
     void testReportLineBetweenDates() {
@@ -61,7 +56,7 @@ public class TestReportLineDAO {
     }
 
     /**
-     *  get purchaseLine between dates
+     *  get purchase line between dates
      */
     private List<PurchaseLineEntity> getPurchaseLineBetweenDates(LocalDateTime afterDate, LocalDateTime beforeDate) {
         return purchaseRepository.findAll().stream().filter(
@@ -78,7 +73,7 @@ public class TestReportLineDAO {
     }
 
     /**
-     * count total cost of purchaseLines
+     * count total cost of purchase lines
      */
     private BigDecimal countTotalCost(List<PurchaseLineEntity> purchaseLineEntityList) {
         return purchaseLineEntityList.stream().map(purchaseLineEntity -> {
@@ -90,7 +85,7 @@ public class TestReportLineDAO {
     }
 
     /**
-     * count total weight of purchaseLines
+     * count total weight of purchase lines
      */
     private BigDecimal countTotalWeight(List<PurchaseLineEntity> purchaseLineEntityList) {
         return purchaseLineEntityList.stream().map(purchaseLineEntity -> {

@@ -1,6 +1,6 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.application.port.out.purchase_line.*;
+import com.virtadity.manease.application.port.out.purchase.line.*;
 import com.virtadity.manease.domain.model.PurchaseLine;
 import com.virtadity.manease.infrastructure.database.dao.exception.ProductEntityNotFoundException;
 import com.virtadity.manease.infrastructure.database.dao.exception.PurchaseEntityNotFoundException;

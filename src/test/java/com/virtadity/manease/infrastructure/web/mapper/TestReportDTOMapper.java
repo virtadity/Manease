@@ -1,9 +1,9 @@
 package com.virtadity.manease.infrastructure.web.mapper;
 
 import com.virtadity.manease.application.model.report.ReportResponse;
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
 import com.virtadity.manease.infrastructure.web.assembler.ReportLineAssembler;
-import com.virtadity.manease.infrastructure.web.dto.report.ReportLineResponseDTO;
+import com.virtadity.manease.infrastructure.web.dto.report.line.ReportLineResponseDTO;
 import com.virtadity.manease.infrastructure.web.dto.report.ReportResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

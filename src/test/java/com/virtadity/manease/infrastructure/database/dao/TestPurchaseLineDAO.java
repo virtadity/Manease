@@ -1,6 +1,5 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.PurchaseLine;
 import com.virtadity.manease.infrastructure.database.entity.*;
 import com.virtadity.manease.infrastructure.database.repository.*;
@@ -20,10 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Import(PersistenceTestSetting.class)
-@ActiveProfiles("test")
 @DataJpaTest
+@ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(PersistenceTestSetting.class)
 public class TestPurchaseLineDAO {
 
     @Autowired
@@ -54,82 +53,68 @@ public class TestPurchaseLineDAO {
 
     @Test
     void testCreatePurchaseLine() {
-        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
-        var productId = UUID.fromString("5acf035c-d833-4d3f-9fa4-0f66550a962b");
-        var purchaseLine = new PurchaseLine(purchaseId, productId, BigDecimal.valueOf(112.0), BigInteger.valueOf(100));
-
+        var purchaseLine = createPurchaseLine();
         var createdPurchaseLine = purchaseLineDAO.create(purchaseLine);
-
-        assertThat(createdPurchaseLine)
-                .isNotNull()
-                .isEqualTo(purchaseLine);
+        assertThat(createdPurchaseLine).isNotNull().isEqualTo(purchaseLine);
     }
 
     @Test
     void testCorrectPurchaseLine() {
-        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
-        var productId = UUID.fromString("5acf035c-d833-4d3f-9fa4-0f66550a962b");
-        var purchaseLine = new PurchaseLine(purchaseId, productId, BigDecimal.valueOf(112.0), BigInteger.valueOf(100));
+        var purchaseLine = createPurchaseLine();
 
         purchaseLineDAO.create(purchaseLine);
 
         var correctPurchaseLine = new PurchaseLine(
-                purchaseId,
-                productId,
+                purchaseLine.purchaseId(),
+                purchaseLine.productId(),
                 BigDecimal.valueOf(116),
                 BigInteger.valueOf(105)
         );
 
-        var correctedPurchaseLine = purchaseLineDAO.correct(purchaseId, productId, correctPurchaseLine);
+        var correctedPurchaseLine = purchaseLineDAO.correct(
+                purchaseLine.purchaseId(),
+                purchaseLine.productId(),
+                correctPurchaseLine
+        );
 
-        assertThat(correctedPurchaseLine)
-                .isNotNull()
-                .isEqualTo(correctPurchaseLine);
+        assertThat(correctedPurchaseLine).isNotNull().isEqualTo(correctPurchaseLine);
     }
 
     @Test
     void testGetAllPurchaseLine() {
         var purchaseLineEntityList = purchaseLineDAO.getAll();
-        assertThat(purchaseLineEntityList)
-                .isNotNull()
-                .isNotEmpty();
+        assertThat(purchaseLineEntityList).isNotNull().isNotEmpty();
     }
 
     @Test
     void testGetOnePurchaseLine() {
-        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
-        var productId = UUID.fromString("5acf035c-d833-4d3f-9fa4-0f66550a962b");
-        var purchaseLine = new PurchaseLine(purchaseId, productId, BigDecimal.valueOf(112.0), BigInteger.valueOf(100));
+        var purchaseLine = createPurchaseLine();
         purchaseLineDAO.create(purchaseLine);
-
-        var purchaseLineByIds = purchaseLineDAO.getOne(purchaseId, productId);
-        assertThat(purchaseLineByIds)
-                .isNotNull()
-                .isNotEmpty()
-                .isEqualTo(Optional.of(purchaseLine));
+        var purchaseLineByIds = purchaseLineDAO.getOne(purchaseLine.purchaseId(), purchaseLine.productId());
+        assertThat(purchaseLineByIds).isNotNull().isNotEmpty().isEqualTo(Optional.of(purchaseLine));
     }
 
     @Test
     void testDeletePurchaseLine() {
-        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
-        var productId = UUID.fromString("5acf035c-d833-4d3f-9fa4-0f66550a962b");
-        var purchaseLine = new PurchaseLine(purchaseId, productId, BigDecimal.valueOf(112.0), BigInteger.valueOf(100));
+        var purchaseLine = createPurchaseLine();
         purchaseLineDAO.create(purchaseLine);
-
-        purchaseLineDAO.delete(purchaseId, productId);
-        var purchaseLineByIds = purchaseLineDAO.getOne(purchaseId, productId);
-        assertThat(purchaseLineByIds)
-                .isNotNull()
-                .isEmpty();
+        purchaseLineDAO.delete(purchaseLine.purchaseId(), purchaseLine.productId());
+        var purchaseLineByIds = purchaseLineDAO.getOne(purchaseLine.purchaseId(), purchaseLine.productId());
+        assertThat(purchaseLineByIds).isNotNull().isEmpty();
     }
 
     @Test
     void testGetAllPurchaseLineOfPurchase() {
         var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
         var purchaseLines = purchaseLineDAO.getAllOfPurchase(purchaseId);
+        assertThat(purchaseLines).isNotNull().isNotEmpty();
+    }
 
-        assertThat(purchaseLines)
-                .isNotNull()
-                .isNotEmpty();
+    private PurchaseLine createPurchaseLine() {
+        var purchaseId = UUID.fromString("450dfe1a-ca54-4cc8-b88c-d83b552768d0");
+        var productId = UUID.fromString("5acf035c-d833-4d3f-9fa4-0f66550a962b");
+        var price = BigDecimal.valueOf(112.0);
+        var quantity = BigInteger.valueOf(100);
+        return new PurchaseLine(purchaseId, productId, price, quantity);
     }
 }

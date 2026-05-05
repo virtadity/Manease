@@ -1,6 +1,6 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
-import com.virtadity.manease.application.model.product_type.ProductTypeResponse;
+import com.virtadity.manease.application.model.product.type.ProductTypeResponse;
 import com.virtadity.manease.infrastructure.web.mapper.ProductTypeDTOMapper;
 import com.virtadity.manease.infrastructure.web.mapper.ProductTypeDTOMapperImpl;
 import org.junit.jupiter.api.AfterEach;

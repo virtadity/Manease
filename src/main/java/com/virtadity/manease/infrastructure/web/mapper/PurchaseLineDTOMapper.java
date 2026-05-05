@@ -1,9 +1,9 @@
 package com.virtadity.manease.infrastructure.web.mapper;
 
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineRequest;
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
-import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineRequestDTO;
-import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineResponseDTO;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineRequest;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineResponse;
+import com.virtadity.manease.infrastructure.web.dto.purchase.line.PurchaseLineRequestDTO;
+import com.virtadity.manease.infrastructure.web.dto.purchase.line.PurchaseLineResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

@@ -1,9 +1,8 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.application.port.out.report_line.ReportLineOutputBoundary;
+import com.virtadity.manease.application.port.out.report.line.ReportLineOutputBoundary;
 import com.virtadity.manease.domain.model.ReportLine;
 import com.virtadity.manease.infrastructure.database.mapper.ReportLineReadModelMapper;
-import com.virtadity.manease.infrastructure.database.read_model.ReportLineReadModel;
 import com.virtadity.manease.infrastructure.database.repository.PurchaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;

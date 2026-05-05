@@ -1,7 +1,7 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
 
-import com.virtadity.manease.application.port.out.product_type.*;
+import com.virtadity.manease.application.port.out.product.type.*;
 import com.virtadity.manease.domain.model.ProductType;
 import com.virtadity.manease.infrastructure.database.mapper.ProductTypeEntityMapper;
 import com.virtadity.manease.infrastructure.database.repository.ProductTypeRepository;

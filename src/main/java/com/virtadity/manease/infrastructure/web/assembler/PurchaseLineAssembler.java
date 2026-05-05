@@ -1,11 +1,11 @@
 package com.virtadity.manease.infrastructure.web.assembler;
 
-import com.virtadity.manease.application.model.purchase_line.PurchaseLineResponse;
-import com.virtadity.manease.infrastructure.web.dto.purchase_line.PurchaseLineResponseDTO;
+import com.virtadity.manease.application.model.purchase.line.PurchaseLineResponse;
+import com.virtadity.manease.infrastructure.web.dto.purchase.line.PurchaseLineResponseDTO;
 import com.virtadity.manease.infrastructure.web.mapper.PurchaseLineDTOMapper;
-import com.virtadity.manease.infrastructure.web.rest_controller.ProductController;
-import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseController;
-import com.virtadity.manease.infrastructure.web.rest_controller.PurchaseLineController;
+import com.virtadity.manease.infrastructure.web.controller.ProductController;
+import com.virtadity.manease.infrastructure.web.controller.PurchaseController;
+import com.virtadity.manease.infrastructure.web.controller.PurchaseLineController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

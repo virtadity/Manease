@@ -1,6 +1,5 @@
 package com.virtadity.manease.infrastructure.database.dao;
 
-import com.virtadity.manease.PersistenceTestSetting;
 import com.virtadity.manease.domain.model.Purchase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +27,14 @@ public class TestPurchaseDAO {
 
     @Test
     void testCreatePurchase() {
-        var purchase = new Purchase(
-                UUID.randomUUID(),
-                "Закупка белых яблок из магнита",
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                producerId
-        );
+        var purchase = createPurchase("Закупка белых яблок из магнита", LocalDateTime.now(), LocalDateTime.now());
         var createdPurchase = purchaseDAO.create(purchase);
+        assertThat(createdPurchase).isNotNull().isEqualTo(purchase);
+    }
 
-        assertThat(createdPurchase)
-                .isNotNull()
-                .isEqualTo(purchase);
+    private Purchase createPurchase(String description, LocalDateTime creationDate, LocalDateTime deliveryDate) {
+        var purchase = new Purchase(UUID.randomUUID(), description, creationDate, deliveryDate, producerId);
+        return purchaseDAO.create(purchase);
     }
 
     @Test
@@ -48,14 +43,7 @@ public class TestPurchaseDAO {
         var purchase = createPurchase(description, LocalDateTime.now(), LocalDateTime.now());
         var purchaseById = purchaseDAO.getOne( purchase.purchaseId());
 
-        assertThat(purchaseById)
-                .isNotNull()
-                .isEqualTo(Optional.of(purchase));
-    }
-
-    private Purchase createPurchase(String description, LocalDateTime creationDate, LocalDateTime deliveryDate) {
-        var purchase = new Purchase(UUID.randomUUID(), description, creationDate, deliveryDate, producerId);
-        return purchaseDAO.create(purchase);
+        assertThat(purchaseById).isNotNull().isEqualTo(Optional.of(purchase));
     }
 
     @Test

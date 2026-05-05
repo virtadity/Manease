@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="initial-schema-purchase-1" author="virtadity">
+        <createTable tableName="purchase">
+            <column name="purchase_id" type="uuid"/>
+            <column name="producer_id" type="uuid"/>
+            <column name="purchase_status_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="initial-schema-2" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_id"/>
+    </changeSet>
+
+    <changeSet id="initial-schema-3" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="producer_id"/>
+    </changeSet>
+
+    <changeSet id="initial-schema-4" author="virtadity">
+        <addNotNullConstraint tableName="purchase" columnName="purchase_status_id"/>
+    </changeSet>
+
+    <changeSet id="initial-schema-5" author="virtadity">
+        <addPrimaryKey tableName="purchase" columnNames="purchase_id"/>
+    </changeSet>
+
+    <changeSet id="initial-schema-6" author="virtadity">
+        <addForeignKeyConstraint
+                baseTableName="purchase"
+                baseColumnNames="purchase_status_id"
+                constraintName="fk-purchase-purchase-status"
+                referencedTableName="purchase_status"
+                referencedColumnNames="purchase_status_id"/>
+    </changeSet>
+
+    <changeSet id="initial-schema-7" author="virtadity">
+        <createIndex tableName="purchase" indexName="purchase_producer_id_index">
+            <column name="producer_id"/>
+            <column name="purchase_status_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

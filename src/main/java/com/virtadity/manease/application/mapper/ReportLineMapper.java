@@ -1,6 +1,6 @@
 package com.virtadity.manease.application.mapper;
 
-import com.virtadity.manease.application.model.report_line.ReportLineResponse;
+import com.virtadity.manease.application.model.report.line.ReportLineResponse;
 import com.virtadity.manease.domain.model.ReportLine;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

@@ -16,13 +16,7 @@ A Spring Boot-based RESTful service for managing purchases and generating aggreg
 - Mockito (Mocking Library)
 - MockMvc (Mocking Library for testing responses and requests)
 - Docker (Containerization)
-
-🐳 Quick Start (Docker)
-To build and run the entire infrastructure (App + PostgreSQL): 
-
-```bash
-docker-compose up --build
-```
+- Kafka (Messaging)
 
 The API will be available at http://localhost:8080.
 
@@ -31,6 +25,7 @@ Integration tests are implemented using Testcontainers to ensure environment con
 To run tests locally:
 ```
 ./gradlew test
+./gradlew ProducerService:test
 ```
 
 📝 Implementation Details

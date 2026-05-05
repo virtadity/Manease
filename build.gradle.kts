@@ -28,6 +28,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("org.springframework.boot:spring-boot-starter-liquibase")
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("org.springframework.boot:spring-boot-kafka")
+	implementation("org.springframework.boot:spring-boot-autoconfigure")
+	implementation("org.springframework.boot:spring-boot-starter-json")
+	implementation("org.springframework.boot:spring-boot-starter-kafka")
 	implementation("org.mockito:mockito-core")
 
 	implementation("org.mapstruct:mapstruct:1.6.3")
@@ -44,6 +49,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.testcontainers:testcontainers-junit-jupiter")
 	testImplementation("org.testcontainers:testcontainers-postgresql")
+	testImplementation("org.testcontainers:testcontainers-kafka")
+	testImplementation("org.awaitility:awaitility")
 	testImplementation("org.springframework.boot:spring-boot-starter-liquibase-test")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

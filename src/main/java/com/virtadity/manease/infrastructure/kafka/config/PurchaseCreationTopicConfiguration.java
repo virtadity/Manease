@@ -1,4 +1,4 @@
-package com.manease.producer.infrastructure.kafka.config;
+package com.virtadity.manease.infrastructure.kafka.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
